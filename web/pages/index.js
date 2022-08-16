@@ -1,8 +1,12 @@
-import React from "react";
-import images from "../assets/icons/index";
-import logo from "../assets/logo-unisza.png";
+import { useRouter } from "next/router";
+
+import Input from "../components/Input";
+
+import { emailIcon, passwordIcon, logo } from "../assets/index";
 
 const login = () => {
+  const router = useRouter();
+
   return (
     <div className="login min-h-screen grid place-items-center grid-rows-[max-content_1fr] bg-[#FFF7D9]">
       <div className="justify-self-start">
@@ -15,20 +19,21 @@ const login = () => {
             <div className="grid gap-4 grid-cols-[max-content_1fr] items-center">
               <img
                 className="justify-self-center w-[2.5rem]"
-                src={images.emailIcon.src}
+                src={emailIcon.src}
                 alt=""
               />
               <Input type="email" placeholder="Enter Your Email..." />
               <img
                 className="justify-self-center w-[2rem]"
-                src={images.passwordIcon.src}
+                src={passwordIcon.src}
                 alt=""
               />
               <Input type="password" placeholder="Enter Your Password..." />
             </div>
             <button
-              type="submit"
+              type="button"
               className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md"
+              onClick={() => router.push("/dashboard")}
             >
               Sign In
             </button>
@@ -39,18 +44,6 @@ const login = () => {
         </p>
       </div>
     </div>
-  );
-};
-
-const Input = ({ type, placeholder }) => {
-  return (
-    <>
-      <input
-        className="border w-full px-2 py-2 border-gray-300 rounded-md"
-        type={type}
-        placeholder={placeholder}
-      />
-    </>
   );
 };
 

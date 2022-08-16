@@ -1,36 +1,41 @@
 import React from "react";
-import register from "../assets/register.png";
-import transaction from "../assets/transaction.png";
-import wallet from "../assets/wallet.png";
-import images from "../assets/icons/index";
+import Layout from "../components/Layout";
 
 const dashboard = () => {
   return (
-    <div className="min-h-screen p-8 flex gap-[2rem] justify-center bg-[#FFF7D9]">
-      <div className="justify-self-start">
-      <button
-        className="ml-6 mt-6 w-15 opacity-70"
-      >
-        <img
-                className="justify-self-center w-[3.0rem]"
-                src={images.listbarIcon.src}
-                alt=""
-              />
-      </button>
+    <Layout>
+      <div className="w-[60%]">
+        <h1 className="ml-3 mb-2 text-xl">Summary</h1>
+        <div className="flex gap-9 p-6 border rounded-md bg-white">
+          <div className="flex-1">
+            <div className="pb-2 uppercase text-sm font-semibold border-b-2 border-b-black">
+              Total Student
+            </div>
+            <div className="mt-3 text-gray-600">
+              <span className="text-black text-7xl font-semibold">54</span>{" "}
+              students
+            </div>
+          </div>
+          <div className="flex-1">
+            <div className="pb-2 uppercase text-sm font-semibold border-b-2 border-b-black">
+              Total Cafe
+            </div>
+            <div className="mt-3 text-gray-600">
+              <span className="text-black text-7xl font-semibold">6</span> cafes
+            </div>
+          </div>
+          <div className="flex-1">
+            <div className="pb-2 uppercase text-sm font-semibold border-b-2 border-b-black">
+              Today Transaction
+            </div>
+            <div className="mt-3 text-gray-600 ">
+              <span className="text-black text-7xl font-semibold">120</span>{" "}
+              transactions
+            </div>
+          </div>
+        </div>
       </div>
-      <Menu img={register.src} title="Registration Form" />
-      <Menu img={wallet.src} title="Add E-Wallet Point" />
-      <Menu img={transaction.src} title="Transaction Details" /> 
-    </div>
-  );
-};
-
-const Menu = ({ img, title }) => {
-  return (
-    <button className="flex flex-col items-center justify-center px-[3rem] rounded-[130px] bg-[#FFD400]">
-      <img src={img} />
-      <p className="font-bold text-[3rem] text-center">{title}</p>
-    </button>
+    </Layout>
   );
 };
 

@@ -3,22 +3,27 @@
 @tailwind utilities;
 
 .login {
-  background-image: url("../assets/shapes/circle.png"),
-    url("../assets/shapes/traingle.png"), url("../assets/shapes/circle.png"),
-    url("../assets/shapes/traingle.png"), url("../assets/shapes/circle.png"),
-    url("../assets/shapes/traingle.png");
-    background-position: -56vh, 26vh -41vh, 156vh -43vh, 173vh 34vh, 93vh 83vh,
-    -12vh 78vh;
+  background-image: url("../assets/bg-1.svg");
+  background-size: cover;
   background-repeat: no-repeat;
   margin: 0 auto;
 }
+
+.bg-2 {
+  background-image: url("../assets/bg-2.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .centertable {
   margin-left: auto;
   margin-right: auto;
-  width: 100%
+  width: 100%;
 }
 
-table, th, td {
+/* table,
+th,
+td {
   background-color: white;
-  border: 1px solid black;;
-}
+  border: 1px solid black;
+} */
