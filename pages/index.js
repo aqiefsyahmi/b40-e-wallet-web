@@ -1,11 +1,40 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
+
+import instance from "./api/instance";
+import { useLocalStorage } from "../hooks";
 
 import Input from "../components/Input";
+import Button from "../components/Button";
 
 import { emailIcon, passwordIcon, logo } from "../assets/index";
 
 const login = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { store } = useLocalStorage();
+
+  const handleLogin = e => {
+    e.preventDefault();
+
+    instance
+      .post("/admin/login", {
+        email: email,
+        password: password,
+      })
+      .then(res => {
+        store("accessToken", res.data.accessToken);
+        store("refreshToken", res.data.refreshToken);
+
+        router.push("/dashboard");
+      })
+      .catch(err => {
+        if (err.response.status) {
+          return alert("Wrong email or password");
+        }
+      });
+  };
 
   return (
     <div className="login min-h-screen grid place-items-center grid-rows-[max-content_1fr] bg-[#FFF7D9]">
@@ -15,28 +44,34 @@ const login = () => {
       <div>
         <div className="p-9 rounded-2xl shadow-md bg-white w-[35rem]">
           <h1 className="mb-8 font-bold text-4xl text-center">Welcome Back</h1>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="grid gap-4 grid-cols-[max-content_1fr] items-center">
               <img
                 className="justify-self-center w-[2.5rem]"
                 src={emailIcon.src}
                 alt=""
               />
-              <Input type="email" placeholder="Enter Your Email..." />
+              <Input
+                type="email"
+                value={email}
+                onAction={e => setEmail(e.target.value)}
+                placeholder="Enter Your Email..."
+              />
               <img
                 className="justify-self-center w-[2rem]"
                 src={passwordIcon.src}
                 alt=""
               />
-              <Input type="password" placeholder="Enter Your Password..." />
+              <Input
+                type="password"
+                value={password}
+                onAction={e => setPassword(e.target.value)}
+                placeholder="Enter Your Password..."
+              />
             </div>
-            <button
-              type="button"
-              className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md"
-              onClick={() => router.push("/dashboard")}
-            >
-              Sign In
-            </button>
+            <div className="flex mt-6">
+              <Button style="flex-1">Sign In</Button>
+            </div>
           </form>
         </div>
         <p className="text-center mt-4">

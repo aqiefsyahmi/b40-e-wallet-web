@@ -1,12 +1,23 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import Button from "./Button";
+import { useLocalStorage } from "../hooks";
 
 import { logo } from "../assets";
 
 const NavBar = () => {
+  const router = useRouter();
+  const { remove } = useLocalStorage();
   const [showDrop, setShowDrop] = useState(false);
+
+  const onLogout = () => {
+    remove("accessToken");
+    remove("refreshToken");
+
+    router.push("/");
+  };
 
   return (
     <nav className="px-4 flex justify-between items-center justify-self-stretch bg-white border-b">
@@ -40,9 +51,7 @@ const NavBar = () => {
         </li>
       </ul>
       <div>
-        <Button>
-          <Link href="/">Logout</Link>
-        </Button>
+        <Button onAction={onLogout}>Logout</Button>
       </div>
     </nav>
   );
