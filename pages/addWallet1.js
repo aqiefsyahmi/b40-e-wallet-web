@@ -3,9 +3,9 @@ import React from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import Input from "../components/Input";
-//import Button from "../components/Button";
+import ReactDOM from "react-dom";
 
-const addWallet = () => {
+const addWallet1 = () => {
     
     const router = useRouter();
 
@@ -74,6 +74,17 @@ const addWallet = () => {
                     <td>010323045890</td>
                     <td>RM0</td>
                 </tr>
+                <tr>
+                    <td className="py-1 text-center w-[7%]">
+                    <input 
+                    type="checkbox" 
+                    />
+                    </td>
+                    <td>try</td>
+                    <td>try</td>
+                    <td>try</td>
+                    <td>try</td>
+                </tr>
                 </tbody>
             </table>
             </div>
@@ -95,4 +106,4 @@ const addWallet = () => {
     );
 };
 
-export default addWallet;
+export default addWallet1;
