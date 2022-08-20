@@ -11,9 +11,34 @@ class addWallet1 extends Component {
     this.state = {
       allChecked: false,
       list: [
-        { id: 1, name: "item1", isChecked: false },
-        { id: 2, name: "item2", isChecked: false },
-        { id: 3, name: "item3", isChecked: false },
+        {
+          id: 1,
+          name: "Ahmad Utat1",
+          icnum: "010323045890",
+          balance: "RM0",
+          isChecked: false,
+        },
+        {
+          id: 2,
+          name: "Ahmad Utat2",
+          icnum: "010323045890",
+          balance: "RM0",
+          isChecked: false,
+        },
+        {
+          id: 3,
+          name: "Ahmad Utat3",
+          icnum: "010323045890",
+          balance: "RM0",
+          isChecked: false,
+        },
+        {
+          id: 4,
+          name: "Ahmad Utat4",
+          icnum: "010323045890",
+          balance: "RM0",
+          isChecked: false,
+        },
       ],
     };
   }
@@ -47,14 +72,43 @@ class addWallet1 extends Component {
           checked={item.isChecked}
           onChange={this.handleChange}
         />
-        <td>try</td>
-        <td>try</td>
-        <td>try</td>
-        <td>try</td>
         {/* <label>{item.name}</label> */}
       </div>
     ));
   };
+
+  renderName = () => {
+    return this.state.list.map((item) => (
+      <div>
+        <label>{item.name}</label>
+      </div>
+    ));
+  };
+
+  renderMatric = () => {
+    return this.state.list.map((item) => (
+      <div>
+        <label>{item.id}</label>
+      </div>
+    ));
+  };
+
+  renderIcNum = () => {
+    return this.state.list.map((item) => (
+      <div>
+        <label>{item.icnum}</label>
+      </div>
+    ));
+  };
+
+  renderBalance = () => {
+    return this.state.list.map((item) => (
+      <div>
+        <label>{item.balance}</label>
+      </div>
+    ));
+  };
+
   render() {
     return (
       <Layout>
@@ -90,44 +144,12 @@ class addWallet1 extends Component {
               <tbody>
                 <tr>
                   <td className="py-1 text-center w-[7%]">
-                    <input type="checkbox" />
-                  </td>
-                  <td>Ahmad Utat bin Naim</td>
-                  <td>012345</td>
-                  <td>010323045890</td>
-                  <td>RM0</td>
-                </tr>
-                <tr>
-                  <td className="py-1 text-center w-[7%]">
-                    <input type="checkbox" />
-                  </td>
-                  <td>Ahmad Utat bin Naim</td>
-                  <td>012345</td>
-                  <td>010323045890</td>
-                  <td>RM0</td>
-                </tr>
-                <tr>
-                  <td className="py-1 text-center w-[7%]">
-                    <input type="checkbox" />
-                  </td>
-                  <td>Ahmad Utat bin Naim</td>
-                  <td>012345</td>
-                  <td>010323045890</td>
-                  <td>RM0</td>
-                </tr>
-                <tr>
-                  <td className="py-1 text-center w-[7%]">
-                    <input type="checkbox" />
-                  </td>
-                  <td>Ahmad Utat bin Naim</td>
-                  <td>012345</td>
-                  <td>010323045890</td>
-                  <td>RM0</td>
-                </tr>
-                <tr>
-                  <td className="py-1 text-center w-[7%]">
                     {this.renderList()}
                   </td>
+                  <td>{this.renderName()}</td>
+                  <td>{this.renderMatric()}</td>
+                  <td>{this.renderIcNum()}</td>
+                  <td>{this.renderBalance()}</td>
                 </tr>
               </tbody>
             </table>
