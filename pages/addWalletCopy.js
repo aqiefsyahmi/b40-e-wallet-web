@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import Input from "../components/Input";
-import ReactDOM from "react-dom";
 
 class addWallet1 extends Component {
   constructor(props) {
