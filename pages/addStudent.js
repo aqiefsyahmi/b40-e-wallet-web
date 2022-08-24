@@ -20,7 +20,7 @@ const addStudent = () => {
       alert("Registration successful");
       router.push("/dashboard");
     } else {
-      alert("Data existed");
+      alert("No matric has been used");
     }
   };
 
