@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 
-import instance from "./api/instance";
-
 import Layout from "../components/Layout";
+import { getSumamary } from "../lib/getSummary";
 
-const dashboard = ({ data }) => {
+const dashboard = () => {
   const [summary, setSummary] = useState({
-    students: 0,
-    cafe: 0,
-    transactions: 0,
+    students: undefined,
+    cafe: undefined,
+    transactions: undefined,
   });
 
   useEffect(() => {
-    console.warn(data);
-  }, [data]);
+    const fetchData = async () => {
+      const data = await getSumamary();
+      setSummary(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Layout>
@@ -58,30 +62,5 @@ const dashboard = ({ data }) => {
     </Layout>
   );
 };
-
-// const students = await instance
-//   .get("/api/students")
-//   .then(res => res.data)
-//   .catch(err => console.error(err));
-
-const fetch = async () => {
-  return JSON.stringify(cafe);
-};
-
-export async function getServerSideProps(context) {
-  // const res = {
-  //   students: students,
-  //   cafe: cafe,
-  //   transactions: transactions,
-  // };
-  const cafe = await instance
-    .get("/api/cafe")
-    .then(response => response.data)
-    .catch(err => console.error(err));
-
-  return {
-    props: { data: cafe || "wekkk" },
-  };
-}
 
 export default dashboard;
