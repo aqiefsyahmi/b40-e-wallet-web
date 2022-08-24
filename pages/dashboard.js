@@ -1,7 +1,20 @@
-import React from "react";
+import { useEffect, useState } from "react";
+
+import instance from "./api/instance";
+
 import Layout from "../components/Layout";
 
-const dashboard = () => {
+const dashboard = ({ data }) => {
+  const [summary, setSummary] = useState({
+    students: 0,
+    cafe: 0,
+    transactions: 0,
+  });
+
+  useEffect(() => {
+    console.warn(data);
+  }, [data]);
+
   return (
     <Layout>
       <div className="w-[60%]">
@@ -12,7 +25,9 @@ const dashboard = () => {
               Total Student
             </div>
             <div className="mt-3 text-gray-600">
-              <span className="text-black text-7xl font-semibold">54</span>{" "}
+              <span className="text-black text-7xl font-semibold">
+                {summary && summary.students}
+              </span>{" "}
               students
             </div>
           </div>
@@ -21,7 +36,10 @@ const dashboard = () => {
               Total Cafe
             </div>
             <div className="mt-3 text-gray-600">
-              <span className="text-black text-7xl font-semibold">6</span> cafes
+              <span className="text-black text-7xl font-semibold">
+                {summary && summary.cafe}
+              </span>{" "}
+              cafes
             </div>
           </div>
           <div className="flex-1">
@@ -29,7 +47,9 @@ const dashboard = () => {
               Today Transaction
             </div>
             <div className="mt-3 text-gray-600 ">
-              <span className="text-black text-7xl font-semibold">120</span>{" "}
+              <span className="text-black text-7xl font-semibold">
+                {summary && summary.transactions}
+              </span>{" "}
               transactions
             </div>
           </div>
@@ -38,5 +58,30 @@ const dashboard = () => {
     </Layout>
   );
 };
+
+// const students = await instance
+//   .get("/api/students")
+//   .then(res => res.data)
+//   .catch(err => console.error(err));
+
+const fetch = async () => {
+  return JSON.stringify(cafe);
+};
+
+export async function getServerSideProps(context) {
+  // const res = {
+  //   students: students,
+  //   cafe: cafe,
+  //   transactions: transactions,
+  // };
+  const cafe = await instance
+    .get("/api/cafe")
+    .then(response => response.data)
+    .catch(err => console.error(err));
+
+  return {
+    props: { data: cafe || "wekkk" },
+  };
+}
 
 export default dashboard;
