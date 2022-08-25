@@ -1,12 +1,51 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import Input from "../components/Input";
-//import Button from "../components/Button";
+import Button from "../components/Button";
+
+import { getStudents } from "../lib/getStudents";
+import { setWallet as updateWallet } from "../lib/setWallet";
 
 const addWallet = () => {
   const router = useRouter();
+  const [students, setStudents] = useState([{}]);
+  const [wallet, setWallet] = useState([]);
+  const [amount, setAmount] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getStudents();
+      setStudents(res);
+    };
+
+    fetchData();
+  }, []);
+
+  const handleChecked = value => {
+    let config = {
+      isChecked: true,
+      matricNo: value,
+    };
+
+    setWallet(prev => [...prev, config]);
+  };
+
+  const handleSetAmount = () => {
+    const data = wallet.map(data => {
+      const fetchData = async () => {
+        const res = await updateWallet(data.matricNo, amount);
+        if (res == 200) return true;
+      };
+      return fetchData();
+    });
+
+    if (data) {
+      alert("Successful");
+      router.push("/dashboard");
+    }
+  };
 
   return (
     <Layout>
@@ -34,57 +73,39 @@ const addWallet = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="py-1 text-center w-[7%]">
-                  <input type="checkbox" />
-                </td>
-                <td>Ahmad Utat bin Naim</td>
-                <td>012345</td>
-                <td>010323045890</td>
-                <td>RM0</td>
-              </tr>
-              <tr>
-                <td className="py-1 text-center w-[7%]">
-                  <input type="checkbox" />
-                </td>
-                <td>Ahmad Utat bin Naim</td>
-                <td>012345</td>
-                <td>010323045890</td>
-                <td>RM0</td>
-              </tr>
-              <tr>
-                <td className="py-1 text-center w-[7%]">
-                  <input type="checkbox" />
-                </td>
-                <td>Ahmad Utat bin Naim</td>
-                <td>012345</td>
-                <td>010323045890</td>
-                <td>RM0</td>
-              </tr>
-              <tr>
-                <td className="py-1 text-center w-[7%]">
-                  <input type="checkbox" />
-                </td>
-                <td>Ahmad Utat bin Naim</td>
-                <td>012345</td>
-                <td>010323045890</td>
-                <td>RM0</td>
-              </tr>
+              {students &&
+                students.map((data, i) => {
+                  const { student_name, matric_no, ic_no, wallet_amount } =
+                    data;
+
+                  return (
+                    <tr key={i}>
+                      <td className="py-1 text-center w-[7%]">
+                        <input
+                          type="checkbox"
+                          checked={false || wallet.isChecked}
+                          onChange={() => handleChecked(matric_no)}
+                        />
+                      </td>
+                      <td>{student_name}</td>
+                      <td>{matric_no}</td>
+                      <td>{ic_no}</td>
+                      <td>RM{parseInt(wallet_amount)}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
         <div className="mt-6 flex justify-end gap-2">
           <div className="w-[4rem]">
-            <Input type="number" />
+            <Input
+              type="number"
+              value={amount}
+              onAction={e => setAmount(e.target.value)}
+            />
           </div>
-          <button
-          className="py-2 px-5 font-medium bg-[#FFD400] rounded-md"
-          type="submit"
-          onClick={() =>
-            router.push("/dashboard", alert("Student Wallet Point Updated"))
-          }
-
-          >Add Point</button>
+          <Button onAction={handleSetAmount}>Add Point</Button>
         </div>
       </div>
     </Layout>
