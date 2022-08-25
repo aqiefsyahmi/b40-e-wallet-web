@@ -1,12 +1,24 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import Input from "../components/Input";
-//import Button from "../components/Button";
+import Button from "../components/Button";
+
+import { getStudents } from "../lib/getStudents";
 
 const addWallet = () => {
   const router = useRouter();
+  const [students, setStudents] = useState([{}]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getStudents();
+      setStudents(res);
+    };
+
+    fetchData();
+  });
 
   return (
     <Layout>
@@ -34,42 +46,23 @@ const addWallet = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="py-1 text-center w-[7%]">
-                  <input type="checkbox" />
-                </td>
-                <td>Ahmad Utat bin Naim</td>
-                <td>012345</td>
-                <td>010323045890</td>
-                <td>RM0</td>
-              </tr>
-              <tr>
-                <td className="py-1 text-center w-[7%]">
-                  <input type="checkbox" />
-                </td>
-                <td>Ahmad Utat bin Naim</td>
-                <td>012345</td>
-                <td>010323045890</td>
-                <td>RM0</td>
-              </tr>
-              <tr>
-                <td className="py-1 text-center w-[7%]">
-                  <input type="checkbox" />
-                </td>
-                <td>Ahmad Utat bin Naim</td>
-                <td>012345</td>
-                <td>010323045890</td>
-                <td>RM0</td>
-              </tr>
-              <tr>
-                <td className="py-1 text-center w-[7%]">
-                  <input type="checkbox" />
-                </td>
-                <td>Ahmad Utat bin Naim</td>
-                <td>012345</td>
-                <td>010323045890</td>
-                <td>RM0</td>
-              </tr>
+              {students &&
+                students.map((data, i) => {
+                  const { student_name, matric_no, ic_no, wallet_amount } =
+                    data;
+
+                  return (
+                    <tr key={i}>
+                      <td className="py-1 text-center w-[7%]">
+                        <input type="checkbox" />
+                      </td>
+                      <td>{student_name}</td>
+                      <td>{matric_no}</td>
+                      <td>{ic_no}</td>
+                      <td>RM{wallet_amount}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
@@ -77,14 +70,13 @@ const addWallet = () => {
           <div className="w-[4rem]">
             <Input type="number" />
           </div>
-          <button
-          className="py-2 px-5 font-medium bg-[#FFD400] rounded-md"
-          type="submit"
-          onClick={() =>
-            router.push("/dashboard", alert("Student Wallet Point Updated"))
-          }
-
-          >Add Point</button>
+          <Button
+            onAction={() =>
+              router.push("/dashboard", alert("Student Wallet Point Updated"))
+            }
+          >
+            Add Point
+          </Button>
         </div>
       </div>
     </Layout>
