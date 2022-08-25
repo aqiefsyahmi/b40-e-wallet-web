@@ -1,7 +1,24 @@
-import React from "react";
+import { useEffect, useState } from "react";
+
 import Layout from "../components/Layout";
+import { getSumamary } from "../lib/getSummary";
 
 const dashboard = () => {
+  const [summary, setSummary] = useState({
+    students: undefined,
+    cafe: undefined,
+    transactions: undefined,
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getSumamary();
+      setSummary(data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Layout>
       <div className="w-[60%]">
@@ -12,7 +29,9 @@ const dashboard = () => {
               Total Student
             </div>
             <div className="mt-3 text-gray-600">
-              <span className="text-black text-7xl font-semibold">54</span>{" "}
+              <span className="text-black text-7xl font-semibold">
+                {summary && summary.students}
+              </span>{" "}
               students
             </div>
           </div>
@@ -21,7 +40,10 @@ const dashboard = () => {
               Total Cafe
             </div>
             <div className="mt-3 text-gray-600">
-              <span className="text-black text-7xl font-semibold">6</span> cafes
+              <span className="text-black text-7xl font-semibold">
+                {summary && summary.cafe}
+              </span>{" "}
+              cafes
             </div>
           </div>
           <div className="flex-1">
@@ -29,7 +51,9 @@ const dashboard = () => {
               Today Transaction
             </div>
             <div className="mt-3 text-gray-600 ">
-              <span className="text-black text-7xl font-semibold">120</span>{" "}
+              <span className="text-black text-7xl font-semibold">
+                {summary && summary.transactions}
+              </span>{" "}
               transactions
             </div>
           </div>

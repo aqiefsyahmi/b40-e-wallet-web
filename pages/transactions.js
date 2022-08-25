@@ -1,8 +1,22 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 import Layout from "../components/Layout";
+import { getTransactions } from "../lib/getTransactions";
+import { useTime } from "../hooks";
 
 const transactions = () => {
+  const [transactions, setTransactions] = useState([{}]);
+  const format = useTime();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getTransactions();
+      setTransactions(res);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Layout>
       <div className="w-2/3 items-center">
@@ -15,52 +29,25 @@ const transactions = () => {
                 <td>Time</td>
                 <td>Sender</td>
                 <td>Recipient</td>
-                <td>E-Wallet Point</td>
+                <td>Amount</td>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="py-1">12.08.2022</td>
-                <td>9.00am</td>
-                <td>012345</td>
-                <td>mamada12</td>
-                <td>RM2</td>
-              </tr>
-              <tr>
-                <td className="py-1">12.08.2022</td>
-                <td>9.00am</td>
-                <td>012345</td>
-                <td>mamada12</td>
-                <td>RM2</td>
-              </tr>
-              <tr>
-                <td className="py-1">12.08.2022</td>
-                <td>9.00am</td>
-                <td>012345</td>
-                <td>mamada12</td>
-                <td>RM2</td>
-              </tr>
-              <tr>
-                <td className="py-1">12.08.2022</td>
-                <td>9.00am</td>
-                <td>012345</td>
-                <td>mamada12</td>
-                <td>RM2</td>
-              </tr>
-              <tr>
-                <td className="py-1">12.08.2022</td>
-                <td>9.00am</td>
-                <td>012345</td>
-                <td>mamada12</td>
-                <td>RM2</td>
-              </tr>
-              <tr>
-                <td className="py-1">12.08.2022</td>
-                <td>9.00am</td>
-                <td>012345</td>
-                <td>mamada12</td>
-                <td>RM2</td>
-              </tr>
+              {transactions &&
+                transactions.map((data, i) => {
+                  const { created_at, sender, recipient, amount } = data;
+                  const formater = format(created_at);
+
+                  return (
+                    <tr key={i}>
+                      <td className="py-1">{formater.date}</td>
+                      <td>{formater.time}</td>
+                      <td>{sender}</td>
+                      <td>{recipient}</td>
+                      <td>RM{parseInt(amount)}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

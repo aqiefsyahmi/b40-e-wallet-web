@@ -70,7 +70,9 @@ const login = () => {
               />
             </div>
             <div className="flex mt-6">
-              <Button style="flex-1">Sign In</Button>
+              <Button style="flex-1" type={"submit"}>
+                Sign In
+              </Button>
             </div>
           </form>
         </div>

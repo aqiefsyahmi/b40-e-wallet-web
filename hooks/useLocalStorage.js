@@ -5,7 +5,7 @@ const useLocalStorage = () => {
   const getItem = item => {
     const res = localStorage.getItem(item);
 
-    return res || "Item not exist";
+    return JSON.parse(res) || "Item not exist";
   };
 
   const remove = item => localStorage.removeItem(item);
