@@ -10,8 +10,9 @@ import { setWallet as updateWallet } from "../lib/setWallet";
 
 const addWallet = () => {
   const router = useRouter();
-  const [students, setStudents] = useState([{}]);
-  const [wallet, setWallet] = useState([]);
+  const [isCheckedAll, setIsCheckAll] = useState(false);
+  const [isChecked, setIsChecked] = useState([]);
+  const [students, setStudents] = useState([]);
   const [amount, setAmount] = useState("");
 
   useEffect(() => {
@@ -23,19 +24,24 @@ const addWallet = () => {
     fetchData();
   }, []);
 
-  const handleChecked = value => {
-    let config = {
-      isChecked: true,
-      matricNo: value,
-    };
+  const handleCheckedAll = e => {
+    setIsCheckAll(!isCheckedAll);
+    setIsChecked(students.map(data => data.matric_no));
 
-    setWallet(prev => [...prev, config]);
+    if (isCheckedAll) setIsChecked([]);
+  };
+
+  const handleChecked = e => {
+    const { checked, id } = e.target;
+    setIsChecked([...isChecked, id]);
+
+    if (!checked) setIsChecked(isChecked.filter(item => item !== id));
   };
 
   const handleSetAmount = () => {
-    const data = wallet.map(data => {
+    const data = isChecked.map(matricNo => {
       const fetchData = async () => {
-        const res = await updateWallet(data.matricNo, amount);
+        const res = await updateWallet(matricNo, amount);
         if (res == 200) return true;
       };
       return fetchData();
@@ -46,6 +52,8 @@ const addWallet = () => {
       router.push("/dashboard");
     }
   };
+
+  console.log(isChecked);
 
   return (
     <Layout>
@@ -58,7 +66,12 @@ const addWallet = () => {
         </form>
         <div className="mt-6 font-medium">
           <p>
-            Select All <input type="checkbox" />
+            Select All{" "}
+            <input
+              type="checkbox"
+              checked={isCheckedAll}
+              onChange={handleCheckedAll}
+            />
           </p>
         </div>
         <div className="mt-4 p-4 pt-0 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
@@ -83,8 +96,9 @@ const addWallet = () => {
                       <td className="py-1 text-center w-[7%]">
                         <input
                           type="checkbox"
-                          checked={false || wallet.isChecked}
-                          onChange={() => handleChecked(matric_no)}
+                          id={matric_no}
+                          checked={isChecked.includes(matric_no)}
+                          onChange={handleChecked}
                         />
                       </td>
                       <td>{student_name}</td>
