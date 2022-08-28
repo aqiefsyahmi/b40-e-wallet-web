@@ -4,7 +4,7 @@ import { useLocalStorage } from "../../hooks";
 const { getItem } = useLocalStorage();
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000" || "https://e-voucher-api.herokuapp.com/",
+  baseURL: "https://e-voucher-api.herokuapp.com/" /*||"http://localhost:3000"*/,
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,11 +12,11 @@ const instance = axios.create({
 
 // Request interceptors for API calls
 instance.interceptors.request.use(
-  config => {
+  (config) => {
     config.headers["Authorization"] = `Bearer ${getItem("accessToken")}`;
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
   }
 );
