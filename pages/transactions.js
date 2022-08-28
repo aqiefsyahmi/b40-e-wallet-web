@@ -20,7 +20,7 @@ const transactions = () => {
   return (
     <Layout>
       <div className="w-2/3 items-center">
-        <h1 className="font-bold text-3xl">Student Transaction Details</h1>
+        <h1 className="font-bold text-3xl">All Transaction Details</h1>
         <div className="mt-4 p-4 pt-0 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
