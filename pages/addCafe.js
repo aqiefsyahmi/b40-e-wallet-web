@@ -30,7 +30,7 @@ const addCafe = () => {
       <div className="p-9 rounded-2xl shadow-md bg-white w-[35rem]">
         <h1 className="mb-8 font-bold text-3xl text-center">Register Cafe</h1>
         <form onSubmit={handleSubmit}>
-          <div className="items-center">
+          <div className="items-center"
             <Input
               type="text"
               placeholder="Full Name"
