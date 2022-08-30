@@ -12,7 +12,7 @@ const addCafe = () => {
   const [cafeName, setCafeName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const res = await setCafe(username, password, name, cafeName);
@@ -30,12 +30,12 @@ const addCafe = () => {
       <div className="p-9 rounded-2xl shadow-md bg-white w-[35rem]">
         <h1 className="mb-8 font-bold text-3xl text-center">Register Cafe</h1>
         <form onSubmit={handleSubmit}>
-          <div className="items-center"
+          <div className="items-center">
             <Input
               type="text"
               placeholder="Full Name"
               value={name}
-              onAction={e => setName(e.target.value)}
+              onAction={(e) => setName(e.target.value)}
               required={true}
             />
             <div className="mb-2" />
@@ -43,7 +43,7 @@ const addCafe = () => {
               type="text"
               placeholder="Username"
               value={username}
-              onAction={e => setUsername(e.target.value)}
+              onAction={(e) => setUsername(e.target.value)}
               required={true}
             />
             <div className="mb-2" />
@@ -51,7 +51,7 @@ const addCafe = () => {
               type="text"
               placeholder="Cafe Name"
               value={cafeName}
-              onAction={e => setCafeName(e.target.value)}
+              onAction={(e) => setCafeName(e.target.value)}
               required={true}
             />
             <div className="mb-2" />
@@ -59,7 +59,7 @@ const addCafe = () => {
               type="password"
               placeholder="Password"
               value={password}
-              onAction={e => setPassword(e.target.value)}
+              onAction={(e) => setPassword(e.target.value)}
               required={true}
             />
           </div>
