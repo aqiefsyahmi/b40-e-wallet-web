@@ -24,22 +24,22 @@ const addWallet = () => {
     fetchData();
   }, []);
 
-  const handleCheckedAll = e => {
+  const handleCheckedAll = (e) => {
     setIsCheckAll(!isCheckedAll);
-    setIsChecked(students.map(data => data.matric_no));
+    setIsChecked(students.map((data) => data.matric_no));
 
     if (isCheckedAll) setIsChecked([]);
   };
 
-  const handleChecked = e => {
+  const handleChecked = (e) => {
     const { checked, id } = e.target;
     setIsChecked([...isChecked, id]);
 
-    if (!checked) setIsChecked(isChecked.filter(item => item !== id));
+    if (!checked) setIsChecked(isChecked.filter((item) => item !== id));
   };
 
   const handleSetAmount = () => {
-    const data = isChecked.map(matricNo => {
+    const data = isChecked.map((matricNo) => {
       const fetchData = async () => {
         const res = await updateWallet(matricNo, amount);
         if (res == 200) return true;
@@ -116,7 +116,7 @@ const addWallet = () => {
             <Input
               type="number"
               value={amount}
-              onAction={e => setAmount(e.target.value)}
+              onAction={(e) => setAmount(e.target.value)}
             />
           </div>
           <Button onAction={handleSetAmount}>Add Point</Button>
