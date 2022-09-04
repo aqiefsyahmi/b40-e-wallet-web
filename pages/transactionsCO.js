@@ -3,6 +3,14 @@ import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { getTransactions } from "../lib/getTransactions";
 import { useTime } from "../hooks";
+import Button from "../components/Button";
+
+const dummyData = [
+  { id: 1, date: "1 Aug - 7 Aug" },
+  { id: 2, date: "8 Aug - 14 Aug" },
+  { id: 3, date: "15 Aug - 21 Aug" },
+  { id: 4, date: "22 Aug - 28 Aug" },
+];
 
 const transactions = () => {
   const [transactions, setTransactions] = useState([{}]);
@@ -13,38 +21,54 @@ const transactions = () => {
       const res = await getTransactions();
       setTransactions(res);
     };
+    setTransactions(dummyData);
 
-    fetchData();
+    // fetchData();
   }, []);
+
+  /* 
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+TODO List
+1. Buat UI based on design figma/ligma
+2. API call
+
+aku rasa en klau pakai grid css lagi sedap drpd table do
+lebih customize
+Truee
+takpela kita buat asal jadi luh, next update kita guna grid
+LESSSGOOOOO
+
+AYUHHH DAH NAK JADI MAT
+
+JADI SUDAH BOSSKUR
+
+*/
 
   return (
     <Layout>
       <div className="w-2/3 items-center">
-        <h1 className="font-bold text-3xl">Cafe Owner Transaction Details</h1>
-        <div className="mt-4 p-4 pt-0 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+        <h1 className="mb-[30px] font-bold text-3xl">Transactions List</h1>
+        <div className="p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
               <tr>
-                <td className="pt-4 pb-3">Date</td>
-                <td>Time</td>
-                <td>Sender</td>
-                <td>Recipient</td>
-                <td>Amount</td>
+                <td className="w-[6rem]"></td>
+                <td className="pb-[37px] font-medium">Date</td>
+                <td className="w-[8rem]"></td>
               </tr>
             </thead>
             <tbody>
               {transactions &&
                 transactions.map((data, i) => {
-                  const { created_at, sender, recipient, amount } = data;
-                  const formater = format(created_at);
+                  const { id, date } = data;
 
                   return (
-                    <tr key={i}>
-                      <td className="py-1">{formater.date}</td>
-                      <td>{formater.time}</td>
-                      <td>{sender}</td>
-                      <td>{recipient}</td>
-                      <td>RM{parseInt(amount)}</td>
+                    <tr key={i} className="text-gray-500">
+                      <td className="pb-6 pr-4 text-center">{id}.</td>
+                      <td className="pb-6">{date}</td>
+                      <td className="pb-6 font-medium">
+                        <button>Show more</button>
+                      </td>
                     </tr>
                   );
                 })}
