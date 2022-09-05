@@ -38,7 +38,7 @@ const transactions = () => {
     <Layout>
       <div className="w-2/3 items-center">
         <h1 className="mb-[30px] font-bold text-3xl">
-          Transactions List (Student)
+          Transactions List (Students)
         </h1>
         <Input type="search" placeholder="Search by Name/ Matric Number..." />
         <div className="mt-4 p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">

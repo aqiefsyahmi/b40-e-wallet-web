@@ -36,7 +36,9 @@ TODO List
   return (
     <Layout>
       <div className="w-2/3 items-center">
-        <h1 className="mb-[30px] font-bold text-3xl">Transactions List</h1>
+        <h1 className="mb-[30px] font-bold text-3xl">
+          Transactions List (Cafe Owners)
+        </h1>
         <div className="p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
