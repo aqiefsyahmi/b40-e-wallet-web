@@ -67,14 +67,6 @@ const transactions = () => {
                     </tr>
                   );
                 })}
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td className="text-center">
-                  <Button>Print</Button>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
