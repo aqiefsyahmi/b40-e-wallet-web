@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
-import Layout from "../components/Layout";
-import { getTransactions } from "../lib/getTransactions";
-import { useTime } from "../hooks";
+import { Layout } from "../../components";
+import { getTransactions } from "../../lib/getTransactions";
+import { useTime } from "../../hooks";
 
 const dummyData = [
   { id: 1, date: "1 Aug - 7 Aug", showmore: "Show More" },
@@ -66,7 +67,11 @@ JADI SUDAH BOSSKUR
                       <td className="pb-6 pr-4 text-center">{id}.</td>
                       <td className="pb-6">{date}</td>
                       <td className="pb-6 font-medium">
-                        <button>{showmore}</button>
+                        <div>
+                          <Link href={`/transactions/${date}`}>
+                            <a>{showmore}</a>
+                          </Link>
+                        </div>
                       </td>
                     </tr>
                   );
