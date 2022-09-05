@@ -32,16 +32,6 @@ TODO List
 1. Buat UI based on design figma/ligma
 2. API call
 
-aku rasa en klau pakai grid css lagi sedap drpd table do
-lebih customize
-Truee
-takpela kita buat asal jadi luh, next update kita guna grid
-LESSSGOOOOO
-
-AYUHHH DAH NAK JADI MAT
-
-JADI SUDAH BOSSKUR
-
 */
 
   return (
