@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { Layout, Button, Input } from "../../components";
-import { getTransactions } from "../../lib/getTransactions";
-import { useTime } from "../../hooks";
+import { Layout, Button, Input } from "../components";
+import { getTransactions } from "../lib/getTransactions";
+import { useTime } from "../hooks";
 
 const dummyData = [
   {
@@ -21,11 +21,8 @@ const dummyData = [
 
 const transactions = () => {
   const router = useRouter();
-  const { week } = router.query;
   const [transactions, setTransactions] = useState([{}]);
   const format = useTime();
-
-  console.log(week);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,11 +37,10 @@ const transactions = () => {
   return (
     <Layout>
       <div className="w-2/3 items-center">
-        <h1 className="mb-[30px] font-bold text-3xl">Transactions {week}</h1>
-        <Input
-          type="search"
-          placeholder="Search for name, matric number, ic number"
-        />
+        <h1 className="mb-[30px] font-bold text-3xl">
+          Transactions List (Student)
+        </h1>
+        <Input type="search" placeholder="Search by Name/ Matric Number..." />
         <div className="mt-4 p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
