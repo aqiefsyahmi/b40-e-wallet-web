@@ -11,7 +11,7 @@ const addStudent = () => {
   const [matricNo, setMatric] = useState("");
   const [icNo, setIcNo] = useState("");
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const res = await setStudent(name, matricNo, icNo);
@@ -36,7 +36,7 @@ const addStudent = () => {
               type="text"
               placeholder="Full Name"
               value={name}
-              onAction={e => setName(e.target.value)}
+              onAction={(e) => setName(e.target.value)}
               required={true}
             />
             <div className="mb-2" />
@@ -44,7 +44,7 @@ const addStudent = () => {
               type="text"
               placeholder="Matric Number"
               value={matricNo}
-              onAction={e => setMatric(e.target.value)}
+              onAction={(e) => setMatric(e.target.value)}
               required={true}
             />
             <div className="mb-2" />
@@ -52,7 +52,7 @@ const addStudent = () => {
               type="text"
               placeholder="IC Number"
               value={icNo}
-              onAction={e => setIcNo(e.target.value)}
+              onAction={(e) => setIcNo(e.target.value)}
               required={true}
             />
           </div>
