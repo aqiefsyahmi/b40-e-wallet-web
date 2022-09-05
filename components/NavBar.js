@@ -56,10 +56,10 @@ const NavBar = () => {
           <div className={`absolute ${!showDrop1 && `hidden`}`}>
             <div className="py-3 grid justify-center w-[8rem] gap-2 rounded-md bg-white shadow">
               <div>
-                <Link href="/transactions">All</Link>
+                <Link href="/transactions">Cafe Owners</Link>
               </div>
               <div>
-                <Link href="/transactionsStud">Student</Link>
+                <Link href="/transactionsStud">Students</Link>
               </div>
             </div>
           </div>
