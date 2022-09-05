@@ -31,7 +31,6 @@ https://www.youtube.com/watch?v=dQw4w9WgXcQ
 TODO List
 1. Buat UI based on design figma/ligma
 2. API call
-
 */
 
   return (
