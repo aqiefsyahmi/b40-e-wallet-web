@@ -84,7 +84,9 @@ const styles = StyleSheet.create({
 
 function MyApp() {
   return (
-    <PDFViewer style={{ width: "100vw", height: "100vh" }}>
+    <PDFViewer
+      style={{ backgroundColor: "tomato", width: "100vw", height: "100vh" }}
+    >
       <MyDocument />
     </PDFViewer>
   );
