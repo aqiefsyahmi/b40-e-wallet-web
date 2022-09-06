@@ -36,9 +36,15 @@ const MyDocument = () => (
       <Text style={{ fontSize: 24, marginBottom: 24 }}>
         Transactions 1 - 7 Aug
       </Text>
-      <View style={[styles.table]}>
-        <View style={{ flexDirection: "row", marginBottom: 4 }}>
-          <Text style={[styles.tableCell]}></Text>
+      <View style={[styles.table, { border: "2pt", paddingTop: "15pt" }]}>
+        <View
+          style={{
+            borderBottom: "2pt",
+            flexDirection: "row",
+            marginBottom: "12pt",
+          }}
+        >
+          <Text style={[styles.tableCell]}>No.</Text>
           <Text style={[styles.tableCell2, { fontWeight: "bold" }]}>
             Cafe Name
           </Text>
@@ -49,7 +55,9 @@ const MyDocument = () => (
         {data.map(({ id, cafeName, total }, i) => (
           <View key={id} style={{ flexDirection: "row" }}>
             <Text style={[styles.tableCell]}>{i + 1}.</Text>
-            <Text style={[styles.tableCell2]}>{cafeName}</Text>
+            <Text style={[styles.tableCell2, { borderLeft: "2pt" }]}>
+              {cafeName}
+            </Text>
             <Text style={[styles.tableCell3]}>{total}</Text>
           </View>
         ))}
