@@ -62,7 +62,9 @@ const transactions = () => {
                 <td></td>
                 <td></td>
                 <td className="text-center">
-                  <Button>Print</Button>
+                  <Button onAction={() => router.push("/testpdf")}>
+                    Print
+                  </Button>
                 </td>
               </tr>
             </tbody>
