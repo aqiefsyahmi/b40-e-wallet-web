@@ -7,6 +7,8 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 
+import "../styles/globals.css";
+
 const data = [
   {
     id: 0,
@@ -31,36 +33,68 @@ const data = [
 ];
 
 const MyDocument = () => (
+  // <Document>
+  //   <Page size="A4" style={styles.page}>
+  //     <Text style={{ fontSize: 24, marginBottom: 24 }}>
+  //       Transactions 1 - 7 Aug
+  //     </Text>
+  //     <View style={[styles.table, { border: "2pt", paddingTop: "15pt" }]}>
+  //       <View
+  //         style={{
+  //           borderBottom: "2pt",
+  //           flexDirection: "row",
+  //           marginBottom: "12pt",
+  //         }}
+  //       >
+  //         <Text style={[styles.tableCell]}>No.</Text>
+  //         <Text style={[styles.tableCell2, { fontWeight: "bold" }]}>
+  //           Cafe Name
+  //         </Text>
+  //         <Text style={[styles.tableCell3, { fontWeight: "bold" }]}>
+  //           Total(RM)
+  //         </Text>
+  //       </View>
+  //       {data.map(({ id, cafeName, total }, i) => (
+  //         <View key={id} style={{ flexDirection: "row" }}>
+  //           <Text style={[styles.tableCell]}>{i + 1}.</Text>
+  //           <Text style={[styles.tableCell2, { borderLeft: "2pt" }]}>
+  //             {cafeName}
+  //           </Text>
+  //           <Text style={[styles.tableCell3]}>{total}</Text>
+  //         </View>
+  //       ))}
+  //     </View>
+  //   </Page>
+  // </Document>
   <Document>
     <Page size="A4" style={styles.page}>
-      <Text style={{ fontSize: 24, marginBottom: 24 }}>
-        Transactions 1 - 7 Aug
-      </Text>
-      <View style={[styles.table, { border: "2pt", paddingTop: "15pt" }]}>
-        <View
-          style={{
-            borderBottom: "2pt",
-            flexDirection: "row",
-            marginBottom: "12pt",
-          }}
-        >
-          <Text style={[styles.tableCell]}>No.</Text>
-          <Text style={[styles.tableCell2, { fontWeight: "bold" }]}>
-            Cafe Name
-          </Text>
-          <Text style={[styles.tableCell3, { fontWeight: "bold" }]}>
-            Total(RM)
-          </Text>
-        </View>
-        {data.map(({ id, cafeName, total }, i) => (
-          <View key={id} style={{ flexDirection: "row" }}>
-            <Text style={[styles.tableCell]}>{i + 1}.</Text>
-            <Text style={[styles.tableCell2, { borderLeft: "2pt" }]}>
-              {cafeName}
+      <View style={styles.table}>
+        <Text style={{ fontSize: 24, marginBottom: 24 }}>
+          Transactions 1 - 7 Aug
+        </Text>
+        <View style={[styles.table, { paddingTop: "15pt" }]}>
+          <View
+            style={{
+              flexDirection: "row",
+              marginBottom: "12pt",
+            }}
+          >
+            <Text style={[styles.tableCell]}>No.</Text>
+            <Text style={[styles.tableCell2, { fontWeight: "bold" }]}>
+              Cafe Name
             </Text>
-            <Text style={[styles.tableCell3]}>{total}</Text>
+            <Text style={[styles.tableCell3, { fontWeight: "bold" }]}>
+              Total(RM)
+            </Text>
           </View>
-        ))}
+          {data.map(({ id, cafeName, total }, i) => (
+            <View key={id} style={{ flexDirection: "row" }}>
+              <Text style={[styles.tableCell]}>{i + 1}.</Text>
+              <Text style={[styles.tableCell2]}>{cafeName}</Text>
+              <Text style={[styles.tableCell3]}>{total}</Text>
+            </View>
+          ))}
+        </View>
       </View>
     </Page>
   </Document>
