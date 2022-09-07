@@ -7,8 +7,6 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 
-import "../styles/globals.css";
-
 const data = [
   {
     id: 0,
