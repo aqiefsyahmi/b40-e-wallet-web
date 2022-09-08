@@ -67,7 +67,7 @@ const MyDocument = () => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.table}>
-        <Text style={{ fontSize: 24, marginBottom: 24 }}>
+        <Text style={{ fontSize: 24, marginBottom: 24, borderBottom: 2 }}>
           Transactions 1 - 7 Aug
         </Text>
         <View style={[styles.table, { paddingTop: "15pt" }]}>
