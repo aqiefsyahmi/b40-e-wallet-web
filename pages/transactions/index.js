@@ -26,13 +26,6 @@ const transactions = () => {
     // fetchData();
   }, []);
 
-  /* 
-https://www.youtube.com/watch?v=dQw4w9WgXcQ
-TODO List
-1. Buat UI based on design figma/ligma
-2. API call
-*/
-
   return (
     <Layout>
       <div className="w-2/3 items-center">
