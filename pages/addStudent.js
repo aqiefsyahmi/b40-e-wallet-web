@@ -87,6 +87,10 @@ const addStudent = () => {
       alert("IC No. must be numbers");
       return false;
     }
+    if (matricNo(maxlength < 6)) {
+      alert("Matric No. must be 6 number");
+      return false;
+    }
 
     const res = await setStudent(name, matricNo, icNo);
 
