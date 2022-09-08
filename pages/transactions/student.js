@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { Layout, Button, Input } from "../components";
-import { getTransactions } from "../lib/getTransactions";
-import { useTime } from "../hooks";
+import { Layout, Input } from "../../components";
+import { getTransactions } from "../../lib/getTransactions";
+import { useTime } from "../../hooks";
 
 const dummyData = [
   {
