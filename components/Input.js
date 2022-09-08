@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ type, placeholder, value, onAction, required }) => {
+const Input = ({ type, placeholder, value, onAction, required, maxlength }) => {
   return (
     <>
       <input
@@ -10,6 +10,7 @@ const Input = ({ type, placeholder, value, onAction, required }) => {
         value={value}
         onChange={onAction}
         required={required}
+        maxLength={maxlength}
       />
     </>
   );

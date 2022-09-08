@@ -78,11 +78,11 @@ const addWallet = () => {
           <table className="centertable">
             <thead>
               <tr>
-                <td className="pt-4 pb-3 w-[7%]">Select</td>
-                <td>Name</td>
-                <td>Matric Number</td>
-                <td>IC Number</td>
-                <td>Balance</td>
+                <th className="pt-4 pb-3 w-[7%]">Select</th>
+                <th className="text-left">Name</th>
+                <th className="text-left">Matric Number</th>
+                <th className="text-left">IC Number</th>
+                <th className="text-left">Balance(RM)</th>
               </tr>
             </thead>
             <tbody>
@@ -104,7 +104,7 @@ const addWallet = () => {
                       <td>{student_name}</td>
                       <td>{matric_no}</td>
                       <td>{ic_no}</td>
-                      <td>RM{parseInt(wallet_amount)}</td>
+                      <td>{wallet_amount}</td>
                     </tr>
                   );
                 })}

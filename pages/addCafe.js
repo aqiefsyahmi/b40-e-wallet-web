@@ -1,8 +1,7 @@
 import { useState } from "react";
-
 import { useRouter } from "next/router";
-import Input from "../components/Input";
-import Layout from "../components/Layout";
+
+import { Input, Layout } from "../components";
 import { setCafe } from "../lib/setCafe";
 
 const addCafe = () => {
@@ -37,6 +36,7 @@ const addCafe = () => {
               value={name}
               onAction={(e) => setName(e.target.value)}
               required={true}
+              maxlength={100}
             />
             <div className="mb-2" />
             <Input
@@ -45,6 +45,7 @@ const addCafe = () => {
               value={username}
               onAction={(e) => setUsername(e.target.value)}
               required={true}
+              maxlength={12}
             />
             <div className="mb-2" />
             <Input
@@ -53,6 +54,7 @@ const addCafe = () => {
               value={cafeName}
               onAction={(e) => setCafeName(e.target.value)}
               required={true}
+              maxlength={100}
             />
             <div className="mb-2" />
             <Input
@@ -61,6 +63,7 @@ const addCafe = () => {
               value={password}
               onAction={(e) => setPassword(e.target.value)}
               required={true}
+              maxlength={20}
             />
           </div>
           <button

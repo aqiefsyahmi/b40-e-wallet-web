@@ -1,37 +1,22 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react"; // AYUHH https://www.youtube.com/watch?v=AMBVRVrNmB0
 
 import { Layout, Input } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
 import { useTime } from "../../hooks";
-
-const dummyData = [
-  {
-    id: 1,
-    studName: "Innocent Pretty Boy",
-    matricNo: "01234",
-    total: "100.00",
-  },
-  { id: 2, studName: "Nerd Boi", matricNo: "01345", total: "140.00" },
-  { id: 3, studName: "GigaChad Kid", matricNo: "01456", total: "250.00" },
-  { id: 4, studName: "Sheeesh Kid", matricNo: "01567", total: "300.00" },
-  { id: 5, studName: "Harry Stopah", matricNo: "01678", total: "220.00" },
-  { id: 4, studName: "Mike Maimunah", matricNo: "01789", total: "110.00" },
-];
+import handleTransactions from "../../utils/handleTransactions";
 
 const transactions = () => {
-  const router = useRouter();
   const [transactions, setTransactions] = useState([{}]);
   const format = useTime();
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await getTransactions();
-      setTransactions(res);
+
+      setTransactions(handleTransactions({ array: res, student: true }));
     };
 
-    // fetchData();
-    setTransactions(dummyData);
+    fetchData();
   }, []);
 
   return (
@@ -56,12 +41,12 @@ const transactions = () => {
             <tbody>
               {transactions &&
                 transactions.map((data, i) => {
-                  const { id, studName, matricNo, total } = data;
+                  const { student_name, matricNo, total } = data;
 
                   return (
                     <tr key={i} className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">{id}.</td>
-                      <td className="pb-6">{studName}</td>
+                      <td className="pb-6 pr-4 text-center">{i + 1}.</td>
+                      <td className="pb-6">{student_name}</td>
                       <td className="pb-6">{matricNo}</td>
                       <td className="pb-6 font-medium text-center">{total}</td>
                     </tr>
