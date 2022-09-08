@@ -11,6 +11,7 @@ const NavBar = () => {
   const router = useRouter();
   const { remove } = useLocalStorage();
   const [showDrop, setShowDrop] = useState(false);
+  const [showDrop1, setShowDrop1] = useState(false);
 
   const onLogout = () => {
     remove("accessToken");
@@ -46,8 +47,22 @@ const NavBar = () => {
         <li>
           <Link href="/addWallet">E-Wallet Point</Link>
         </li>
-        <li>
-          <Link href="/transactions">Transactions</Link>
+        <li
+          className="relative cursor-pointer"
+          onMouseEnter={() => setShowDrop1(true)}
+          onMouseLeave={() => setShowDrop1(false)}
+        >
+          Transactions
+          <div className={`absolute ${!showDrop1 && `hidden`}`}>
+            <div className="py-3 grid justify-center w-[8rem] gap-2 rounded-md bg-white shadow">
+              <div>
+                <Link href="/transactions/cafe">Cafe Owners</Link>
+              </div>
+              <div>
+                <Link href="/transactions/student">Students</Link>
+              </div>
+            </div>
+          </div>
         </li>
       </ul>
       <div>

@@ -24,22 +24,22 @@ const addWallet = () => {
     fetchData();
   }, []);
 
-  const handleCheckedAll = e => {
+  const handleCheckedAll = (e) => {
     setIsCheckAll(!isCheckedAll);
-    setIsChecked(students.map(data => data.matric_no));
+    setIsChecked(students.map((data) => data.matric_no));
 
     if (isCheckedAll) setIsChecked([]);
   };
 
-  const handleChecked = e => {
+  const handleChecked = (e) => {
     const { checked, id } = e.target;
     setIsChecked([...isChecked, id]);
 
-    if (!checked) setIsChecked(isChecked.filter(item => item !== id));
+    if (!checked) setIsChecked(isChecked.filter((item) => item !== id));
   };
 
   const handleSetAmount = () => {
-    const data = isChecked.map(matricNo => {
+    const data = isChecked.map((matricNo) => {
       const fetchData = async () => {
         const res = await updateWallet(matricNo, amount);
         if (res == 200) return true;
@@ -78,11 +78,11 @@ const addWallet = () => {
           <table className="centertable">
             <thead>
               <tr>
-                <td className="pt-4 pb-3 w-[7%]">Select</td>
-                <td>Name</td>
-                <td>Matric Number</td>
-                <td>IC Number</td>
-                <td>Balance</td>
+                <th className="pt-4 pb-3 w-[7%]">Select</th>
+                <th className="text-left">Name</th>
+                <th className="text-left">Matric Number</th>
+                <th className="text-left">IC Number</th>
+                <th className="text-left">Balance(RM)</th>
               </tr>
             </thead>
             <tbody>
@@ -104,7 +104,7 @@ const addWallet = () => {
                       <td>{student_name}</td>
                       <td>{matric_no}</td>
                       <td>{ic_no}</td>
-                      <td>RM{parseInt(wallet_amount)}</td>
+                      <td>{wallet_amount}</td>
                     </tr>
                   );
                 })}
@@ -116,7 +116,7 @@ const addWallet = () => {
             <Input
               type="number"
               value={amount}
-              onAction={e => setAmount(e.target.value)}
+              onAction={(e) => setAmount(e.target.value)}
             />
           </div>
           <Button onAction={handleSetAmount}>Add Point</Button>

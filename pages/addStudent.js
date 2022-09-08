@@ -11,8 +11,26 @@ const addStudent = () => {
   const [matricNo, setMatric] = useState("");
   const [icNo, setIcNo] = useState("");
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // validasion
+    if (isNaN(parseInt(matricNo))) {
+      alert("Matric No. must be numbers");
+      return false;
+    }
+    if (isNaN(parseInt(icNo))) {
+      alert("IC No. must be numbers");
+      return false;
+    }
+    if (matricNo.length !== 6) {
+      alert("Matric No. must be in 6 numbers");
+      return false;
+    }
+    if (icNo.length !== 12) {
+      alert("IC No. must be in 12 numbers");
+      return false;
+    }
 
     const res = await setStudent(name, matricNo, icNo);
 
@@ -20,6 +38,7 @@ const addStudent = () => {
       alert("Registration successful");
       router.push("/dashboard");
     } else {
+      console.log(res);
       alert("No matric has been used");
     }
   };
@@ -36,24 +55,27 @@ const addStudent = () => {
               type="text"
               placeholder="Full Name"
               value={name}
-              onAction={e => setName(e.target.value)}
+              onAction={(e) => setName(e.target.value)}
               required={true}
+              maxlength={100}
             />
             <div className="mb-2" />
             <Input
               type="text"
-              placeholder="Matric Number"
+              placeholder="Matric Number e.g xxxxxx"
               value={matricNo}
-              onAction={e => setMatric(e.target.value)}
+              onAction={(e) => setMatric(e.target.value)}
               required={true}
+              maxlength={6}
             />
             <div className="mb-2" />
             <Input
               type="text"
-              placeholder="IC Number"
+              placeholder="IC Number e.g xxxxxxxxxxxx"
               value={icNo}
-              onAction={e => setIcNo(e.target.value)}
+              onAction={(e) => setIcNo(e.target.value)}
               required={true}
+              maxlength={12}
             />
           </div>
           <button
