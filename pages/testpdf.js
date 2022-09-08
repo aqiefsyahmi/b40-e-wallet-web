@@ -70,15 +70,25 @@ const MyDocument = () => (
         <Text style={{ fontSize: 24, marginBottom: 24, borderBottom: 2 }}>
           Transactions 1 - 7 Aug
         </Text>
-        <View style={[styles.table, { paddingTop: "15pt" }]}>
+        <View
+          style={[
+            styles.table,
+            { borderTop: 2, borderRight: 2, borderLeft: 2 },
+          ]}
+        >
           <View
             style={{
               flexDirection: "row",
-              marginBottom: "12pt",
+              borderBottom: 2,
             }}
           >
-            <Text style={[styles.tableCell]}>No.</Text>
-            <Text style={[styles.tableCell2, { fontWeight: "bold" }]}>
+            <Text style={[styles.tableCell, { borderRight: 2 }]}>No.</Text>
+            <Text
+              style={[
+                styles.tableCell2,
+                { fontWeight: "bold", borderRight: 2, paddingLeft: 3 },
+              ]}
+            >
               Cafe Name
             </Text>
             <Text style={[styles.tableCell3, { fontWeight: "bold" }]}>
@@ -86,9 +96,15 @@ const MyDocument = () => (
             </Text>
           </View>
           {data.map(({ id, cafeName, total }, i) => (
-            <View key={id} style={{ flexDirection: "row" }}>
-              <Text style={[styles.tableCell]}>{i + 1}.</Text>
-              <Text style={[styles.tableCell2]}>{cafeName}</Text>
+            <View key={id} style={{ flexDirection: "row", borderBottom: 2 }}>
+              <Text style={[styles.tableCell, { borderRight: 2 }]}>
+                {i + 1}.
+              </Text>
+              <Text
+                style={[styles.tableCell2, { borderRight: 2, paddingLeft: 3 }]}
+              >
+                {cafeName}
+              </Text>
               <Text style={[styles.tableCell3]}>{total}</Text>
             </View>
           ))}
@@ -109,16 +125,13 @@ const styles = StyleSheet.create({
   tableCell: {
     flex: 1,
     textAlign: "center",
-    marginBottom: 16,
   },
   tableCell2: {
     flex: 4,
-    marginBottom: 16,
   },
   tableCell3: {
     flex: 2,
     textAlign: "center",
-    marginBottom: 16,
   },
 });
 
