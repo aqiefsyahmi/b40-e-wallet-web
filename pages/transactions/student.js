@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react"; // AYUHH https://www.youtube.com/watch?v=AMBVRVrNmB0
 
-import { Layout, Input } from "../components";
-import { getTransactions } from "../lib/getTransactions";
-import { useTime } from "../hooks";
-import handleTransactions from "../utils/handleTransactions";
+import { Layout, Input } from "../../components";
+import { getTransactions } from "../../lib/getTransactions";
+import { useTime } from "../../hooks";
+import handleTransactions from "../../utils/handleTransactions";
 
 const transactions = () => {
-  const router = useRouter();
   const [transactions, setTransactions] = useState([{}]);
   const format = useTime();
 
