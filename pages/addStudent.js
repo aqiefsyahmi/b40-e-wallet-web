@@ -80,7 +80,7 @@ const addStudent = () => {
           </div>
           <button
             type="submit"
-            className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md"
+            className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md transition duration-150 hover:bg-[#d6b513]"
           >
             Register
           </button>
