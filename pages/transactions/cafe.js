@@ -53,7 +53,7 @@ const transactions = () => {
                       <td className="pb-6 font-medium">
                         <div>
                           <Link href={`/transactions/${date}`}>
-                            <a className="py-2 px-5 bg-[#E4E4E4] rounded-md">
+                            <a className="py-2 px-5 bg-[#E4E4E4] rounded-md transition duration-150 hover:bg-[#d1cfcf]">
                               {showmore}
                             </a>
                           </Link>
