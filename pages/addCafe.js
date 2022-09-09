@@ -24,19 +24,19 @@ const addCafe = () => {
       return false;
     }
 
-    const res = await setCafe(username, password, name, cafeName);
+    if (password.match(requirementpass)) {
+      const res = await setCafe(username, password, name, cafeName);
 
-    // if (password.match(requirementpass)) {
-    if (res == 201) {
-      alert("Registration successful");
-      router.push("/dashboard");
+      if (res == 201) {
+        alert("Registration successful");
+        router.push("/dashboard");
+      } else {
+        alert("Username has been used");
+      }
     } else {
-      alert("Username has been used");
+      alert("Password must have at least one UpperCase and one Number");
+      return false;
     }
-    // } else {
-    //   alert("Password must have at least one UpperCase and one Number");
-    //   return false;
-    // }
   };
 
   return (
