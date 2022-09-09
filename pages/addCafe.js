@@ -14,13 +14,26 @@ const addCafe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //Validation
+    var requirementpass = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/;
+
+    if (password.length <= 5) {
+      alert("password must have more than 5 character");
+      return false;
+    }
+
     const res = await setCafe(username, password, name, cafeName);
 
-    if (res == 201) {
-      alert("Registration successful");
-      router.push("/dashboard");
+    if (password.match(requirementpass)) {
+      if (res == 201) {
+        alert("Registration successful");
+        router.push("/dashboard");
+      } else {
+        alert("Username has been used");
+      }
     } else {
-      alert("Username has been used");
+      alert("Password must have at least one UpperCase and one Number");
+      return false;
     }
   };
 
