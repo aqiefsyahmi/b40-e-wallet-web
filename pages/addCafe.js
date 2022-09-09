@@ -15,6 +15,8 @@ const addCafe = () => {
     e.preventDefault();
 
     //Validation
+
+    //var requirement password
     var requirementpass = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/;
 
     if (password.length <= 5) {
@@ -24,17 +26,17 @@ const addCafe = () => {
 
     const res = await setCafe(username, password, name, cafeName);
 
-    if (password.match(requirementpass)) {
-      if (res == 201) {
-        alert("Registration successful");
-        router.push("/dashboard");
-      } else {
-        alert("Username has been used");
-      }
+    // if (password.match(requirementpass)) {
+    if (res == 201) {
+      alert("Registration successful");
+      router.push("/dashboard");
     } else {
-      alert("Password must have at least one UpperCase and one Number");
-      return false;
+      alert("Username has been used");
     }
+    // } else {
+    //   alert("Password must have at least one UpperCase and one Number");
+    //   return false;
+    // }
   };
 
   return (
