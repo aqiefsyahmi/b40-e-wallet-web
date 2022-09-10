@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
@@ -14,6 +14,8 @@ const addWallet = () => {
   const [isChecked, setIsChecked] = useState([]);
   const [students, setStudents] = useState([]);
   const [amount, setAmount] = useState("");
+  //Filter Student
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,9 +93,20 @@ const addWallet = () => {
                   const { student_name, matric_no, ic_no, wallet_amount } =
                     data;
 
-                  const filterstudent = student_name.filter();
+                  //Filter Student
+                  const filteredstudent = students.filter(({ student_name }) =>
+                    student_name
+                      .toLowerCase()
+                      .includes(searchText.toLowerCase())
+                  );
+
                   return (
-                    <tr key={i}>
+                    <tr key={(i, student_name)}>
+                      <input
+                        type="text"
+                        value={searchText}
+                        onChange={({ target }) => setSearchText(target.value)}
+                      />
                       <td className="py-1 text-center w-[7%]">
                         <input
                           type="checkbox"
@@ -102,6 +115,9 @@ const addWallet = () => {
                           onChange={handleChecked}
                         />
                       </td>
+                      {filteredstudent.map(({ student_name }) => (
+                        <td key={student_name}>{student_name}</td>
+                      ))}
                       <td>{student_name}</td>
                       <td>{matric_no}</td>
                       <td>{ic_no}</td>
