@@ -91,6 +91,7 @@ const addWallet = () => {
                   const { student_name, matric_no, ic_no, wallet_amount } =
                     data;
 
+                  const filterstudent = student_name.filter();
                   return (
                     <tr key={i}>
                       <td className="py-1 text-center w-[7%]">
