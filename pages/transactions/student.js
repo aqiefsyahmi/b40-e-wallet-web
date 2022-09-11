@@ -77,6 +77,11 @@ const transactions = () => {
   // Filter Student
   const [searchText, setSearchText] = useState("");
 
+  //Filter Student
+  const filteredstudent = transactions.filter(({ student_name }) =>
+    student_name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getTransactions();
@@ -93,54 +98,47 @@ const transactions = () => {
         <h1 className="mb-[30px] font-bold text-3xl">
           Transactions List (Students)
         </h1>
-        {transactions &&
-          transactions.map((data, i) => {
-            const { student_name, matricNo, total } = data;
+        <input
+          className="border w-full px-2 py-2 border-gray-300 rounded-md"
+          type="text"
+          value={searchText}
+          placeholder="Search by Name/ Matric Number..."
+          onChange={({ target }) => setSearchText(target.value)}
+        />
 
-            //Filter Student
-            const filteredstudent = transactions.filter(({ student_name }) =>
-              student_name.toLowerCase().includes(searchText.toLowerCase())
-            );
+        <div className="mt-4 p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+          <table className="centertable">
+            <thead>
+              <tr>
+                <td className="w-[6rem]"></td>
+                <td className="pb-[37px] font-medium">Student Name</td>
+                <td className="pb-[37px] font-medium">Matric No.</td>
+                <td className="pb-[37px] w-[14rem] font-medium text-center">
+                  Total(RM)
+                </td>
+              </tr>
+            </thead>
+            {transactions &&
+              transactions.map((data, i) => {
+                const { student_name, matricNo, total } = data;
 
-            return (
-              <div>
-                <input
-                  className="border w-full px-2 py-2 border-gray-300 rounded-md"
-                  type="text"
-                  value={searchText}
-                  placeholder="Search by Name/ Matric Number..."
-                  onChange={({ target }) => setSearchText(target.value)}
-                />
-                <div className="mt-4 p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
-                  <table className="centertable">
-                    <thead>
-                      <tr>
-                        <td className="w-[6rem]"></td>
-                        <td className="pb-[37px] font-medium">Student Name</td>
-                        <td className="pb-[37px] font-medium">Matric No.</td>
-                        <td className="pb-[37px] w-[14rem] font-medium text-center">
-                          Total(RM)
-                        </td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr key={i} className="text-gray-500">
-                        <td className="pb-6 pr-4 text-center">{i + 1}.</td>
-                        {/* Filter Student */}
-                        {filteredstudent.map(({ student_name }) => (
-                          <td>{student_name}</td>
-                        ))}
-                        <td className="pb-6">{matricNo}</td>
-                        <td className="pb-6 font-medium text-center">
-                          {total}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            );
-          })}
+                return (
+                  <tbody>
+                    <tr key={i} className="text-gray-500">
+                      <td className="pb-6 pr-4 text-center">{i + 1}.</td>
+                      {/* Filter Student */}
+                      {filteredstudent.map(({ student_name }) => (
+                        <td className="pb-6">{student_name}</td>
+                      ))}
+                      <td className="pb-6">{student_name}</td>
+                      <td className="pb-6">{matricNo}</td>
+                      <td className="pb-6 font-medium text-center">{total}</td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+          </table>
+        </div>
       </div>
     </Layout>
   );
