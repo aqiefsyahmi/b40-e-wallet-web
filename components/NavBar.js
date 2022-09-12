@@ -61,12 +61,12 @@ const NavBar = () => {
             <div className="py-3 grid w-[8rem] gap-2 rounded-md bg-white shadow ">
               <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
                 <div className="grid justify-center duration-150 hover:font-semibold">
-                  <Link href="/addCafe">Cafe Owner</Link>
+                  <Link href="/usersdata/usersdataCafe">Cafe Owner</Link>
                 </div>
               </div>
               <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
                 <div className="ml-6 duration-150 hover:font-semibold">
-                  <Link href="/addStudent">Student</Link>
+                  <Link href="/usersdata/usersdataStudent">Student</Link>
                 </div>
               </div>
             </div>

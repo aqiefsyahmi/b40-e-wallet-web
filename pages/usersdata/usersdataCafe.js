@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Layout, Input } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
 import { useTime } from "../../hooks";
-import handleTransactions from "../../utils/handleTransactions";
+import handleTransactions from "../../utils/handleUsersData";
 
 const transactions = () => {
   const [transactions, setTransactions] = useState([]);

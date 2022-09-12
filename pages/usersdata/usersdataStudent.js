@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Layout, Input } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
 import { useTime } from "../../hooks";
-import handleTransactions from "../../utils/handleTransactions";
+import handleTransactions from "../../utils/handleUsersData";
 
 const transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -30,9 +30,7 @@ const transactions = () => {
   return (
     <Layout>
       <div className="w-2/3 items-center">
-        <h1 className="mb-[30px] font-bold text-3xl">
-          Transactions List (Students)
-        </h1>
+        <h1 className="mb-[30px] font-bold text-3xl">Students Data</h1>
         <input
           className="border w-full px-2 py-2 border-gray-300 rounded-md"
           type="text"
@@ -48,6 +46,7 @@ const transactions = () => {
                 <td className="w-[6rem]"></td>
                 <td className="pb-[37px] font-medium">Student Name</td>
                 <td className="pb-[37px] font-medium">Matric No.</td>
+                <td className="pb-[37px] font-medium">IC No.</td>
                 <td className="pb-[37px] w-[14rem] font-medium text-center">
                   Total(RM)
                 </td>
