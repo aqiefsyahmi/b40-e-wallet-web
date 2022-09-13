@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Layout, Input } from "../../components";
-import { getTransactions } from "../../lib/getTransactions";
-import { useTime } from "../../hooks";
-import handleTransactions from "../../utils/handleUsersData";
+import { useRouter } from "next/router";
+import Layout from "../../components/Layout";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 
-const transactions = () => {
-  const [transactions, setTransactions] = useState([]);
-  const format = useTime();
-  // Filter Student
-  const [searchText, setSearchText] = useState("");
-  //Filter Student
-  const filteredstudent = transactions.filter(
-    ({ student_name, matricNo }) =>
-      student_name.toLowerCase().includes(searchText.toLowerCase()) ||
-      matricNo.toLowerCase().includes(searchText.toLowerCase())
-  );
+import { getStudents } from "../../lib/getStudents";
+
+const addWallet = () => {
+  const router = useRouter();
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getTransactions();
-
-      setTransactions(handleTransactions({ array: res, student: true }));
+      const res = await getStudents();
+      setStudents(res);
     };
 
     fetchData();
@@ -29,45 +22,40 @@ const transactions = () => {
 
   return (
     <Layout>
-      <div className="w-2/3 items-center">
+      <div className="mt-4 w-2/3 items-center">
         <h1 className="mb-[30px] font-bold text-3xl">Students Data</h1>
-        <input
-          className="border w-full px-2 py-2 border-gray-300 rounded-md"
-          type="text"
-          value={searchText}
-          placeholder="Search by Name/ Matric Number..."
-          onChange={({ target }) => setSearchText(target.value)}
-        />
-
-        <div className="mt-4 p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+        <form>
+          <Input
+            type="search"
+            placeholder="Search for name, matric number, ic number"
+          />
+        </form>
+        <div className="mt-4 p-4 pt-0 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
               <tr>
-                <td className="w-[6rem]"></td>
-                <td className="pb-[37px] font-medium">Student Name</td>
-                <td className="pb-[37px] font-medium">Matric No.</td>
-                <td className="pb-[37px] font-medium">IC No.</td>
-                <td className="pb-[37px] w-[14rem] font-medium text-center">
-                  Total(RM)
-                </td>
+                <th className="text-left">Name</th>
+                <th className="text-left">Matric Number</th>
+                <th className="text-left">IC Number</th>
+                <th className="text-left">Balance(RM)</th>
               </tr>
             </thead>
-            {filteredstudent &&
-              filteredstudent.map((data, i) => {
-                const { student_name, matricNo, ic_no, total } = data;
+            <tbody>
+              {students &&
+                students.map((data, i) => {
+                  const { student_name, matric_no, ic_no, wallet_amount } =
+                    data;
 
-                return (
-                  <tbody>
-                    <tr key={i} className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">{i + 1}.</td>
-                      <td className="pb-6">{student_name}</td>
-                      <td className="pb-6">{matricNo}</td>
-                      <td className="pb-6">{ic_no}</td>
-                      <td className="pb-6 font-medium text-center">{total}</td>
+                  return (
+                    <tr key={i}>
+                      <td>{student_name}</td>
+                      <td>{matric_no}</td>
+                      <td>{ic_no}</td>
+                      <td>{wallet_amount}</td>
                     </tr>
-                  </tbody>
-                );
-              })}
+                  );
+                })}
+            </tbody>
           </table>
         </div>
       </div>
@@ -75,4 +63,4 @@ const transactions = () => {
   );
 };
 
-export default transactions;
+export default addWallet;
