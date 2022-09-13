@@ -34,6 +34,7 @@ const addWallet = () => {
           <table className="centertable">
             <thead>
               <tr>
+                <th className="text-center w-[2rem]"></th>
                 <th className="text-left">Name</th>
                 <th className="text-left">Matric Number</th>
                 <th className="text-left">IC Number</th>
@@ -48,6 +49,7 @@ const addWallet = () => {
 
                   return (
                     <tr key={i}>
+                      <td className="text-center">{i + 1}.</td>
                       <td>{student_name}</td>
                       <td>{matric_no}</td>
                       <td>{ic_no}</td>
