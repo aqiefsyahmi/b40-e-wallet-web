@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 
 import { getStudents } from "../../lib/getStudents";
 
-const addWallet = () => {
+const studentsdata = () => {
   const router = useRouter();
   const [students, setStudents] = useState([]);
 
@@ -59,4 +59,4 @@ const addWallet = () => {
   );
 };
 
-export default addWallet;
+export default studentsdata;
