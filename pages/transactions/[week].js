@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Layout, Button } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
 import { useTime } from "../../hooks";
+import { displayTotal } from "../../utils/handleTransactions";
 
 const dummyData = [
   { id: 1, cafeName: "Kafe Mamada", total: "100.00" },
@@ -18,17 +19,14 @@ const transactions = () => {
   const [transactions, setTransactions] = useState([{}]);
   const format = useTime();
 
-  console.log(week);
-
   useEffect(() => {
     const fetchData = async () => {
       const res = await getTransactions();
-      setTransactions(res);
+      week && setTransactions(displayTotal({ data: res, date: week }));
     };
 
-    // fetchData();
-    setTransactions(dummyData);
-  }, []);
+    fetchData();
+  }, [week]);
 
   return (
     <Layout>
@@ -52,7 +50,7 @@ const transactions = () => {
 
                   return (
                     <tr key={i} className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">{id}.</td>
+                      <td className="pb-6 pr-4 text-center">{i + 1}.</td>
                       <td className="pb-6">{cafeName}</td>
                       <td className="pb-6 font-medium text-center">{total}</td>
                     </tr>
