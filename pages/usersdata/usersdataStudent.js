@@ -24,12 +24,6 @@ const addWallet = () => {
     <Layout>
       <div className="mt-4 w-2/3 items-center">
         <h1 className="mb-[30px] font-bold text-3xl">Students Data</h1>
-        <form>
-          <Input
-            type="search"
-            placeholder="Search for name, matric number, ic number"
-          />
-        </form>
         <div className="mt-4 p-4 pt-0 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
