@@ -54,7 +54,7 @@ const transactions = () => {
             </thead>
             {filteredstudent &&
               filteredstudent.map((data, i) => {
-                const { student_name, matricNo, total } = data;
+                const { student_name, matricNo, ic_no, total } = data;
 
                 return (
                   <tbody>
@@ -62,6 +62,7 @@ const transactions = () => {
                       <td className="pb-6 pr-4 text-center">{i + 1}.</td>
                       <td className="pb-6">{student_name}</td>
                       <td className="pb-6">{matricNo}</td>
+                      <td className="pb-6">{ic_no}</td>
                       <td className="pb-6 font-medium text-center">{total}</td>
                     </tr>
                   </tbody>

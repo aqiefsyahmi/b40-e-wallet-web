@@ -82,7 +82,12 @@ const handleTransactions = ({ array, student, cafe }) => {
       ? countTotal({ arr: array, sender: d.sender })
       : countTotal({ arr: array, recipient: d.recipient });
     return student
-      ? { student_name: d.student_name, matricNo: d.sender, total: total }
+      ? {
+          student_name: d.student_name,
+          matricNo: d.sender,
+          ic_no: d.ic_no,
+          total: total,
+        }
       : { cafe_name: cafe_name, total: total };
   });
 
