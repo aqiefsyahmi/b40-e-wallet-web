@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
 
 import { getCafe } from "../../lib/getCafe";
 
