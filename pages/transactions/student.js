@@ -10,7 +10,6 @@ const transactions = () => {
   const format = useTime();
   // Filter Student
   const [searchText, setSearchText] = useState("");
-  //Filter Student
   const filteredstudent = transactions.filter(
     ({ student_name, matricNo }) =>
       student_name.toLowerCase().includes(searchText.toLowerCase()) ||
