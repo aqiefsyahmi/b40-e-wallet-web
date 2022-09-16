@@ -8,6 +8,7 @@ import handleTransactions from "../../utils/handleTransactions";
 const transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const format = useTime();
+
   // Filter Student
   const [searchText, setSearchText] = useState("");
   const filteredstudent = transactions.filter(

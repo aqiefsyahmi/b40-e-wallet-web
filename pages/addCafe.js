@@ -14,9 +14,7 @@ const addCafe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //Validation
-
-    //var requirement password
+    //Validation Password
     var requirementpass = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/;
 
     if (password.length <= 5) {
