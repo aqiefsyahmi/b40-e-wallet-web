@@ -102,7 +102,6 @@ export const displayTotal = ({ data, date }) => {
       return !recipients.includes(recipient, i + 1);
     }); // no 3
 
-  console.log("res", response);
   return response;
 };
 
