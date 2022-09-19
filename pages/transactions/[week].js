@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-// import Link from "next/link";
+import Link from "next/link";
 
 import { Layout, Button } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
@@ -18,7 +18,6 @@ const transactions = () => {
     };
 
     fetchData();
-    router.prefetch(`/testpdf`);
   }, [week, transactions]);
 
   return (
@@ -53,17 +52,11 @@ const transactions = () => {
                 <td></td>
                 <td></td>
                 <td className="text-center">
-                  <Button
-                    onAction={() => {
-                      router.push(`/testpdf`);
-                    }}
-                  >
-                    {/* <Link href={`/testpdf`}>
-                    <a target="_blank" rel="noopener noreferrer"> */}
-                    Print
-                    {/* </a>
-                  </Link> */}
-                  </Button>
+                  <Link href={`/transactions/pdf/${week}`}>
+                    <a target="_blank" rel="noopener noreferrer">
+                      <Button>Print</Button>
+                    </a>
+                  </Link>
                 </td>
               </tr>
             </tbody>
