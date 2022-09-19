@@ -4,7 +4,7 @@ const handleTransactions = ({ array, student, cafe }) => {
   // kira total
   const countTotal = ({ sender, recipient }) => {
     let total = 0;
-    array.map((data) => {
+    array.map(data => {
       if (sender && data.sender === sender) total += parseInt(data.amount);
       if (recipient && data.recipient === recipient)
         total += parseInt(data.amount);
@@ -15,7 +15,7 @@ const handleTransactions = ({ array, student, cafe }) => {
 
   const uniqueIds = [];
 
-  const unique = array.filter((element) => {
+  const unique = array.filter(element => {
     const isDuplicate = student
       ? uniqueIds.includes(element.sender)
       : uniqueIds.includes(element.recipient);
@@ -31,7 +31,7 @@ const handleTransactions = ({ array, student, cafe }) => {
     return false;
   });
 
-  const newArr = unique.map((d) => {
+  const newArr = unique.map(d => {
     const total = student
       ? countTotal({ arr: array, sender: d.sender })
       : countTotal({ arr: array, recipient: d.recipient });
@@ -41,6 +41,68 @@ const handleTransactions = ({ array, student, cafe }) => {
   });
 
   return newArr;
+};
+
+export const filteredDate = ({ data }) => {
+  const response = data
+    .map(({ created_at }, i) => {
+      const start = moment(created_at).startOf("week");
+      const end = moment(created_at).endOf("week");
+
+      return {
+        id: i,
+        date: `${start.format("DD MMM")} - ${end.format("DD MMM")}`,
+      };
+    })
+    .filter(({ created_at }, i, arr) => {
+      const dates = arr.map(({ created_at }) => created_at);
+      return !dates.includes(created_at, i + 1);
+    });
+
+  return response;
+};
+
+export const displayTotal = ({ data, date }) => {
+  // 1. convert date to e.g 1 Aug done
+  // 2. filter date e.g 1 Aug - 7 Aug => return array
+  // 3. count total of transaction => return array of total amount
+
+  const dates = date.split(" - ");
+  const formatDate = d => moment(d).format("D MMM"); // function no 1
+
+  const countTotal = ({ sender, recipient }) => {
+    let total = 0;
+    data.map(data => {
+      if (sender && data.sender === sender) total += parseInt(data.amount);
+      if (recipient && data.recipient === recipient)
+        total += parseInt(data.amount);
+    });
+
+    return `${total}.00`;
+  };
+
+  const response = data // no 2
+    .filter(
+      ({ created_at }) =>
+        moment(created_at) >=
+          moment(new Date(`${dates[0]} ${moment().year()}`)) &&
+        moment(created_at) <= moment(new Date(`${dates[1]} ${moment().year()}`))
+    )
+    .map(dt => {
+      const total = countTotal({ recipient: dt.recipient });
+      return {
+        recipient: dt.recipient,
+        cafeName: dt.cafe_name,
+        total: total,
+        created_at: formatDate(dt.created_at),
+      };
+    })
+    .filter(({ recipient }, i, a) => {
+      const recipients = a.map(d => d.recipient);
+      return !recipients.includes(recipient, i + 1);
+    }); // no 3
+
+  return response;
 };
 
 export default handleTransactions;

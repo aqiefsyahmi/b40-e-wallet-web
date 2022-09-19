@@ -14,13 +14,26 @@ const addCafe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await setCafe(username, password, name, cafeName);
+    //Validation Password
+    var requirementpass = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/;
 
-    if (res == 201) {
-      alert("Registration successful");
-      router.push("/dashboard");
+    if (password.length <= 5) {
+      alert("password must have more than 5 character");
+      return false;
+    }
+
+    if (password.match(requirementpass)) {
+      const res = await setCafe(username, password, name, cafeName);
+
+      if (res == 201) {
+        alert("Registration successful");
+        router.push("/dashboard");
+      } else {
+        alert("Username has been used");
+      }
     } else {
-      alert("Username has been used");
+      alert("Password must have at least one UpperCase and one Number");
+      return false;
     }
   };
 
@@ -68,7 +81,7 @@ const addCafe = () => {
           </div>
           <button
             type="submit"
-            className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md"
+            className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md transition duration-150 hover:bg-[#d6b513]"
           >
             Register
           </button>

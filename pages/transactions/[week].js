@@ -1,34 +1,25 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+// import Link from "next/link";
 
 import { Layout, Button } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
-import { useTime } from "../../hooks";
-
-const dummyData = [
-  { id: 1, cafeName: "Kafe Mamada", total: "100.00" },
-  { id: 2, cafeName: "Pak Amid Cafe", total: "140.00" },
-  { id: 3, cafeName: "GigaChad Cafe", total: "250.00" },
-  { id: 4, cafeName: "Kafe Sheesh", total: "300.00" },
-];
+import { displayTotal } from "../../utils/handleTransactions";
 
 const transactions = () => {
   const router = useRouter();
   const { week } = router.query;
   const [transactions, setTransactions] = useState([{}]);
-  const format = useTime();
-
-  console.log(week);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await getTransactions();
-      setTransactions(res);
+      week && setTransactions(displayTotal({ data: res, date: week }));
     };
 
-    // fetchData();
-    setTransactions(dummyData);
-  }, []);
+    fetchData();
+    router.prefetch(`/testpdf`);
+  }, [week, transactions]);
 
   return (
     <Layout>
@@ -48,11 +39,11 @@ const transactions = () => {
             <tbody>
               {transactions &&
                 transactions.map((data, i) => {
-                  const { id, cafeName, total } = data;
+                  const { cafeName, total } = data;
 
                   return (
                     <tr key={i} className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">{id}.</td>
+                      <td className="pb-6 pr-4 text-center">{i + 1}.</td>
                       <td className="pb-6">{cafeName}</td>
                       <td className="pb-6 font-medium text-center">{total}</td>
                     </tr>
@@ -62,8 +53,16 @@ const transactions = () => {
                 <td></td>
                 <td></td>
                 <td className="text-center">
-                  <Button onAction={() => router.push("/testpdf")}>
+                  <Button
+                    onAction={() => {
+                      router.push(`/testpdf`);
+                    }}
+                  >
+                    {/* <Link href={`/testpdf`}>
+                    <a target="_blank" rel="noopener noreferrer"> */}
                     Print
+                    {/* </a>
+                  </Link> */}
                   </Button>
                 </td>
               </tr>
