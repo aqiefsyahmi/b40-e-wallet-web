@@ -54,11 +54,11 @@ export const filteredDate = ({ data }) => {
         date: `${start.format("DD MMM")} - ${end.format("DD MMM")}`,
       };
     })
-    .filter(({ created_at }, i, arr) => {
-      const dates = arr.map(({ created_at }) => created_at);
-      return !dates.includes(created_at, i + 1);
+    .filter(({ date }, i, arr) => {
+      const dates = arr.map(({ date }) => date);
+      return !dates.includes(date, i + 1);
     });
-
+    
   return response;
 };
 
