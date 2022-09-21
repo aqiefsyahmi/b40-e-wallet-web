@@ -14,7 +14,7 @@ const addStudent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // validasion
+    // validation
     if (isNaN(parseInt(matricNo))) {
       alert("Matric No. must be numbers");
       return false;
