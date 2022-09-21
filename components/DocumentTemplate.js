@@ -1,41 +1,17 @@
 import {
   Document,
-  PDFViewer,
   Page,
   Text,
   View,
   StyleSheet,
-} from "@react-pdf/renderer";
+} from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 
-const data = [
-  {
-    id: 0,
-    cafeName: "Spank Me",
-    total: "2000.00",
-  },
-  {
-    id: 1,
-    cafeName: "Mummy Thicc",
-    total: "220.00",
-  },
-  {
-    id: 3,
-    cafeName: "Daddy I Miss You",
-    total: "10.00",
-  },
-  {
-    id: 4,
-    cafeName: "Goofy Ahh",
-    total: "150.00",
-  },
-];
-
-const MyDocument = () => (
+const DocumentTemplate = ({ data, week }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.table}>
         <Text style={{ fontSize: 24, marginBottom: 24, borderBottom: 2 }}>
-          Transactions 1 - 7 Aug
+          Transactions {week}
         </Text>
         <View
           style={[
@@ -62,8 +38,8 @@ const MyDocument = () => (
               Total(RM)
             </Text>
           </View>
-          {data.map(({ id, cafeName, total }, i) => (
-            <View key={id} style={{ flexDirection: "row", borderBottom: 2 }}>
+          {data.map(({ cafeName, total }, i) => (
+            <View key={i} style={{ flexDirection: "row", borderBottom: 2 }}>
               <Text style={[styles.tableCell, { borderRight: 2 }]}>
                 {i + 1}.
               </Text>
@@ -102,16 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-function MyApp() {
-  return (
-    <PDFViewer
-      style={{ backgroundColor: "tomato", width: "100vw", height: "100vh" }}
-    >
-      <MyDocument />
-    </PDFViewer>
-  );
-}
-
-export default MyApp;
-
-// https://dev.to/finallynero/generating-pdf-documents-in-react-using-react-pdf-4ka7
+export default DocumentTemplate;

@@ -1,23 +1,15 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import { Layout, Button } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
-import { useTime } from "../../hooks";
 import { displayTotal } from "../../utils/handleTransactions";
-
-const dummyData = [
-  { id: 1, cafeName: "Kafe Mamada", total: "100.00" },
-  { id: 2, cafeName: "Pak Amid Cafe", total: "140.00" },
-  { id: 3, cafeName: "GigaChad Cafe", total: "250.00" },
-  { id: 4, cafeName: "Kafe Sheesh", total: "300.00" },
-];
 
 const transactions = () => {
   const router = useRouter();
   const { week } = router.query;
   const [transactions, setTransactions] = useState([{}]);
-  const format = useTime();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +18,7 @@ const transactions = () => {
     };
 
     fetchData();
-  }, [week]);
+  }, [week, transactions]);
 
   return (
     <Layout>
@@ -46,7 +38,7 @@ const transactions = () => {
             <tbody>
               {transactions &&
                 transactions.map((data, i) => {
-                  const { id, cafeName, total } = data;
+                  const { cafeName, total } = data;
 
                   return (
                     <tr key={i} className="text-gray-500">
@@ -60,9 +52,11 @@ const transactions = () => {
                 <td></td>
                 <td></td>
                 <td className="text-center">
-                  <Button onAction={() => router.push("/testpdf")}>
-                    Print
-                  </Button>
+                  <Link href={`/transactions/pdf/${week}`}>
+                    <a target="_blank" rel="noopener noreferrer">
+                      <Button>Print</Button>
+                    </a>
+                  </Link>
                 </td>
               </tr>
             </tbody>
