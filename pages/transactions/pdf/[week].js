@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { PDFViewer } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
-import DocumentTemplate from "../../../components/DocumentTemplate";
 import { useRouter } from "next/router";
+import { PDFViewer } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+
+import { DocumentTemplate } from "../../../components";
 import { getTransactions } from "../../../lib/getTransactions";
 import { displayTotal } from "../../../utils/handleTransactions";
 
