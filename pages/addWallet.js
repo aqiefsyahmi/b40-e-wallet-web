@@ -53,15 +53,13 @@ const addWallet = () => {
     }
   };
 
-  console.log(isChecked);
-
   return (
     <Layout>
       <div className="mt-4 w-2/3 items-center">
         <form>
           <Input
             type="search"
-            placeholder="Search for name, matric number, ic number"
+            placeholder="Search by Name/ Matric Number/ IC Number"
           />
         </form>
         <div className="mt-6 font-medium">
