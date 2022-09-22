@@ -192,18 +192,22 @@ const addWallet = () => {
     }
   };
 
-  console.log(isChecked);
-
   return (
     <Layout>
       <div className="mt-4 w-2/3 items-center">
         <form>
+<<<<<<< HEAD
           <input
             className="border w-full px-2 py-2 border-gray-300 rounded-md"
             type="text"
             value={searchText}
             placeholder="Search for name, matric number or ic number"
             onChange={({ target }) => setSearchText(target.value)}
+=======
+          <Input
+            type="search"
+            placeholder="Search by Name/ Matric Number/ IC Number"
+>>>>>>> 97f6a6bdb22bb188858a4031db1c09ac61c5a186
           />
         </form>
         <div className="mt-6 font-medium">
