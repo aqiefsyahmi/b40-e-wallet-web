@@ -37,19 +37,41 @@ const NavBar = () => {
           onMouseEnter={() => setShowDrop(true)}
           onMouseLeave={() => setShowDrop(false)}
         >
-          <div className="duration-150 hover:font-bold">Registrations</div>
+          <li
+            className={router.pathname != "/addCafe" ? "active" : "font-bold"}
+          >
+            <li
+              className={
+                router.pathname != "/addStudent" ? "active" : "font-bold"
+              }
+            >
+              <div className="duration-150 hover:font-bold">Registrations</div>
+            </li>
+          </li>
           <div className={`absolute ${!showDrop && `hidden`}`}>
             <div className="py-3 grid w-[8rem] gap-2 rounded-md bg-white shadow ">
-              <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
-                <div className="grid justify-center duration-150 hover:font-semibold">
-                  <Link href="/addCafe">Cafe Owner</Link>
+              <li
+                className={
+                  router.pathname != "/addCafe" ? "active" : "font-semibold"
+                }
+              >
+                <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
+                  <div className="grid justify-center duration-150 hover:font-semibold">
+                    <Link href="/addCafe">Cafe Owner</Link>
+                  </div>
                 </div>
-              </div>
-              <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
-                <div className="ml-6 duration-150 hover:font-semibold">
-                  <Link href="/addStudent">Student</Link>
+              </li>
+              <li
+                className={
+                  router.pathname != "/addStudent" ? "active" : "font-semibold"
+                }
+              >
+                <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
+                  <div className="ml-6 duration-150 hover:font-semibold">
+                    <Link href="/addStudent">Student</Link>
+                  </div>
                 </div>
-              </div>
+              </li>
             </div>
           </div>
         </li>
@@ -58,19 +80,47 @@ const NavBar = () => {
           onMouseEnter={() => setShowDrop1(true)}
           onMouseLeave={() => setShowDrop1(false)}
         >
-          <div className="duration-150 hover:font-bold">Users Data</div>
+          <li
+            className={
+              router.pathname != "/usersdata/cafe" ? "active" : "font-bold"
+            }
+          >
+            <li
+              className={
+                router.pathname != "/usersdata/student" ? "active" : "font-bold"
+              }
+            >
+              <div className="duration-150 hover:font-bold">Users Data</div>
+            </li>
+          </li>
           <div className={`absolute ${!showDrop1 && `hidden`}`}>
             <div className="py-3 grid w-[8rem] gap-2 rounded-md bg-white shadow ">
-              <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
-                <div className="grid justify-center duration-150 hover:font-semibold">
-                  <Link href="/usersdata/cafe">Cafe Owner</Link>
+              <li
+                className={
+                  router.pathname != "/usersdata/cafe"
+                    ? "active"
+                    : "font-semibold"
+                }
+              >
+                <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
+                  <div className="grid justify-center duration-150 hover:font-semibold">
+                    <Link href="/usersdata/cafe">Cafe Owner</Link>
+                  </div>
                 </div>
-              </div>
-              <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
-                <div className="ml-6 duration-150 hover:font-semibold">
-                  <Link href="/usersdata/student">Student</Link>
+              </li>
+              <li
+                className={
+                  router.pathname != "/usersdata/student"
+                    ? "active"
+                    : "font-semibold"
+                }
+              >
+                <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
+                  <div className="ml-6 duration-150 hover:font-semibold">
+                    <Link href="/usersdata/student">Student</Link>
+                  </div>
                 </div>
-              </div>
+              </li>
             </div>
           </div>
         </li>
@@ -86,19 +136,49 @@ const NavBar = () => {
           onMouseEnter={() => setShowDrop2(true)}
           onMouseLeave={() => setShowDrop2(false)}
         >
-          <div className="duration-150 hover:font-bold">Transactions</div>
+          <li
+            className={
+              router.pathname != "/transactions/cafe" ? "active" : "font-bold"
+            }
+          >
+            <li
+              className={
+                router.pathname != "/transactions/student"
+                  ? "active"
+                  : "font-bold"
+              }
+            >
+              <div className="duration-150 hover:font-bold">Transactions</div>
+            </li>
+          </li>
           <div className={`absolute ${!showDrop2 && `hidden`}`}>
             <div className="py-3 grid justify-center w-[8rem] gap-2 rounded-md bg-white shadow">
-              <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
-                <div className="grid justify-center duration-150 hover:font-semibold">
-                  <Link href="/transactions/cafe">Cafe Owners</Link>
+              <li
+                className={
+                  router.pathname != "/transactions/cafe"
+                    ? "active"
+                    : "font-semibold"
+                }
+              >
+                <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
+                  <div className="grid justify-center duration-150 hover:font-semibold">
+                    <Link href="/transactions/cafe">Cafe Owners</Link>
+                  </div>
                 </div>
-              </div>
-              <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
-                <div className="ml-5 duration-150 hover:font-semibold">
-                  <Link href="/transactions/student">Students</Link>
+              </li>
+              <li
+                className={
+                  router.pathname != "/transactions/student"
+                    ? "active"
+                    : "font-semibold"
+                }
+              >
+                <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
+                  <div className="ml-5 duration-150 hover:font-semibold">
+                    <Link href="/transactions/student">Students</Link>
+                  </div>
                 </div>
-              </div>
+              </li>
             </div>
           </div>
         </li>
