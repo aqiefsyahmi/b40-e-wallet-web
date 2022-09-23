@@ -25,7 +25,9 @@ const NavBar = () => {
     <nav className="px-4 flex justify-between items-center justify-self-stretch bg-white border-b">
       <img src={logo.src} alt="" className="w-[8rem]" />
       <ul className="py-6 flex items-center justify-center gap-6 ">
-        <li>
+        <li
+          className={router.pathname != "/dashboard" ? "active" : "font-bold"}
+        >
           <div className="duration-150 hover:font-bold">
             <Link href="/dashboard">Home</Link>
           </div>
@@ -72,7 +74,9 @@ const NavBar = () => {
             </div>
           </div>
         </li>
-        <li>
+        <li
+          className={router.pathname != "/addWallet" ? "active" : "font-bold"}
+        >
           <div className="duration-150 hover:font-bold">
             <Link href="/addWallet">E-Wallet Point</Link>
           </div>
