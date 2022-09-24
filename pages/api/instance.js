@@ -3,11 +3,12 @@ import { useLocalStorage } from "../../hooks";
 
 const { getItem, store } = useLocalStorage();
 
+
 const instance = axios.create({
   baseURL:
-    // "https://e-voucher-api.herokuapp.com/" || 
-    "http://localhost:3000",
-  headers: {
+    process.env.NEXT_PUBLIC_API_KEY
+  // || "http://localhost:3000"
+  , headers: {
     "Content-Type": "application/json",
   },
 });
