@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useLocalStorage } from "../../hooks";
 
-const { getItem } = useLocalStorage();
+const { getItem, store } = useLocalStorage();
 
 const instance = axios.create({
-  baseURL: "https://e-voucher-api.herokuapp.com/" /*||"http://localhost:3000"*/,
+  baseURL:
+    // "https://e-voucher-api.herokuapp.com/" || 
+    "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,6 +20,27 @@ instance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
+  }
+);
+
+// refresh token implementation
+const getRefreshToken = () => {
+  instance.post('/token', { refreshToken: getItem("refreshToken") })
+    .then(token => store('accessToken', token.data.accessToken))
+    .catch(err => console.error('error refresh', err));
+}
+
+instance.interceptors.response.use(
+  response => {
+    return response;
+  },
+  async (error) => {
+    if (error.response.status == 403) {
+      getRefreshToken();
+
+      // return prev request
+      return instance(error.config)
+    }
   }
 );
 
