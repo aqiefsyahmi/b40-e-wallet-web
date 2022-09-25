@@ -43,7 +43,7 @@ const login = () => {
       </div>
       <div>
         <div className="p-9 rounded-2xl shadow-md bg-white w-[35rem]">
-          <h1 className="mb-8 font-bold text-4xl text-center">Welcome Backs</h1>
+          <h1 className="mb-8 font-bold text-4xl text-center">Welcome Back</h1>
           <form onSubmit={handleLogin}>
             <div className="grid gap-4 grid-cols-[max-content_1fr] items-center">
               <img
