@@ -3,12 +3,10 @@ import { useLocalStorage } from "../../hooks";
 
 const { getItem, store } = useLocalStorage();
 
-
 const instance = axios.create({
-  baseURL:
-    process.env.NEXT_PUBLIC_API_KEY
+  baseURL: process.env.NEXT_PUBLIC_API_KEY,
   // || "http://localhost:3000"
-  , headers: {
+  headers: {
     "Content-Type": "application/json",
   },
 });
@@ -36,7 +34,7 @@ const getRefreshToken = async () => {
 }
 
 instance.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
   async (error) => {
