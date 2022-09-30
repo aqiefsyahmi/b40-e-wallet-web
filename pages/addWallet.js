@@ -14,7 +14,7 @@ const addWallet = () => {
   const [students, setStudents] = useState([]);
   const [amount, setAmount] = useState("");
 
-  // Filter Students
+  // Filter Students Func
   const [searchText, setSearchText] = useState("");
   const filteredstudent = students.filter(
     ({ student_name, matric_no, ic_no }) =>
