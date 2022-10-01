@@ -33,6 +33,7 @@ const addWallet = () => {
     fetchData();
   }, []);
 
+  // Checkbox Function
   const handleCheckedAll = (e) => {
     setIsCheckAll(!isCheckedAll);
     setIsChecked(students.map((data) => data.matric_no));
