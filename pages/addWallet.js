@@ -49,6 +49,7 @@ const addWallet = () => {
     if (!checked) setIsChecked(isChecked.filter((item) => item !== id));
   };
 
+  //Checkbox if the box checked
   const handleSetAmount = () => {
     const data = isChecked.map((matricNo) => {
       const fetchData = async () => {
