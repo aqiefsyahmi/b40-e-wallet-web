@@ -41,7 +41,7 @@ const addWallet = () => {
     if (isCheckedAll) setIsChecked([]);
   };
 
-  // Checkbox Function Checked
+  // Checkbox function checked
   const handleChecked = (e) => {
     const { checked, id } = e.target;
     setIsChecked([...isChecked, id]);
