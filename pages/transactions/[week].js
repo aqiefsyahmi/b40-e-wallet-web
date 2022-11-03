@@ -18,7 +18,7 @@ const transactions = () => {
     };
 
     fetchData();
-  }, [week, transactions]);
+  }, [week]);
 
   return (
     <Layout>

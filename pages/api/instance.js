@@ -3,12 +3,10 @@ import { useLocalStorage } from "../../hooks";
 
 const { getItem, store } = useLocalStorage();
 
-
 const instance = axios.create({
-  baseURL:
-    process.env.NEXT_PUBLIC_API_KEY
+  baseURL: process.env.NEXT_PUBLIC_API_KEY,
   // || "http://localhost:3000"
-  , headers: {
+  headers: {
     "Content-Type": "application/json",
   },
 });
@@ -25,23 +23,29 @@ instance.interceptors.request.use(
 );
 
 // refresh token implementation
-const getRefreshToken = () => {
-  instance.post('/token', { refreshToken: getItem("refreshToken") })
-    .then(token => store('accessToken', token.data.accessToken))
-    .catch(err => console.error('error refresh', err));
+const getRefreshToken = async () => {
+  try {
+    const response = instance.post('/token', { refreshToken: getItem("refreshToken") })
+    store('accessToken', response.data.accessToken)
+
+  } catch (error) {
+    console.warn('error refresh', error)
+  }
 }
 
 instance.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
   async (error) => {
+    const originalRequest = error.config
     if (error.response.status == 403) {
-      getRefreshToken();
+      await getRefreshToken();
 
       // return prev request
-      return instance(error.config)
+      return instance(originalRequest)
     }
+    return Promise.reject(error)
   }
 );
 
