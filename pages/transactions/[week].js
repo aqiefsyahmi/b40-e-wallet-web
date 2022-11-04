@@ -45,10 +45,18 @@ const transactions = () => {
                       <td className="pb-6 pr-4 text-center">{i + 1}.</td>
                       <td className="pb-6">{cafeName}</td>
                       <td className="pb-6 font-medium text-center">{total}</td>
+                      <div>
+                          <Link href={`/transactions/`}>
+                            <a className="py-2 px-5 font-medium text-center bg-[#E4E4E4] rounded-md transition duration-150 hover:bg-[#d1cfcf]">
+                              Show Details
+                            </a>
+                          </Link>
+                        </div>
                     </tr>
                   );
                 })}
               <tr>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td className="text-center">
