@@ -25,7 +25,7 @@ const DocumentTemplate = ({ data, week }) => (
               borderBottom: 2,
             }}
           >
-            <Text style={[styles.tableCell, { borderRight: 2 }]}>No.</Text>
+            <Text style={[ styles.tableCell, { borderRight: 2 }]}>No.</Text>
             <Text
               style={[
                 styles.tableCell2,
