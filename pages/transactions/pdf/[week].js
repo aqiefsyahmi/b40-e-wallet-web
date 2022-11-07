@@ -11,9 +11,23 @@ const Pdf = () => {
   const { week } = router.query;
   const [transactions, setTransactions] = useState([{}]);
 
+  //test date
+  // const [ dateTime, setDateTime ] = useState([{}]);
+
+
   useEffect(() => {
+    
     const fetchData = async () => {
+
+      //test date
+      // var dt = new Date();
+      // document.getElementById('date-time').innerHTML = dt;
+
       const res = await getTransactions();
+
+      //test date
+      // setDateTime(displayTotal({data: 'date-time'}));
+
       setTransactions(displayTotal({ data: res, date: week }));
     };
 

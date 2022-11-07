@@ -35,7 +35,7 @@ const cafeownersdata = () => {
             className="border w-full px-2 py-2 border-gray-300 rounded-md"
             type="text"
             value={searchText}
-            placeholder="Search for name or username"
+            placeholder="Search for name, username or cafe name"
             onChange={({ target }) => setSearchText(target.value)}
           />
         <div className="mt-4 p-4 pt-0 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
