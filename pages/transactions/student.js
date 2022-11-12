@@ -66,7 +66,7 @@ const transactions = () => {
                       <td className="pb-6">{matricNo}</td>
                       <td className="pb-6 font-medium text-center">{total}</td>
                       <td className="pb-6">
-                          <Link href={`/transactions/`}>
+                          <Link href={`/transactions/details/studentdetails`}>
                             {/* <a className="py-2 px-5 font-medium text-center bg-[#E4E4E4] rounded-md transition duration-150 hover:bg-[#d1cfcf]"> */}
                               Show Details
                             {/* </a> */}
