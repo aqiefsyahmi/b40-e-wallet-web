@@ -13,9 +13,6 @@ const transactions = () => {
     const fetchData = async () => {
       const res = await getTransactions();
 
-      var dt = new Date();
-      document.getElementById('date-time').innerHTML=dt;
-
       setTransactions(filteredDate({ data: res }));
     };
 
@@ -60,7 +57,6 @@ const transactions = () => {
                 })}
             </tbody>
           </table>
-          <p>Current Date and Time is <span id='date-time'></span>.</p>
         </div>
       </div>
     </Layout>

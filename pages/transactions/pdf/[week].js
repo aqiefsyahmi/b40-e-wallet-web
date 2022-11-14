@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { PDFViewer } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+import moment from "moment";
 
 import { DocumentTemplate } from "../../../components";
 import { getTransactions } from "../../../lib/getTransactions";
@@ -11,22 +12,13 @@ const Pdf = () => {
   const { week } = router.query;
   const [transactions, setTransactions] = useState([{}]);
 
-  //test date
-  // const [ dateTime, setDateTime ] = useState([{}]);
-
+  var tarikh = moment().format('Do MMMM YYYY, h:mm a'); //date
 
   useEffect(() => {
     
     const fetchData = async () => {
 
-      //test date
-      // var dt = new Date();
-      // document.getElementById('date-time').innerHTML = dt;
-
       const res = await getTransactions();
-
-      //test date
-      // setDateTime(displayTotal({data: 'date-time'}));
 
       setTransactions(displayTotal({ data: res, date: week }));
     };
@@ -37,7 +29,7 @@ const Pdf = () => {
   if (week !== undefined)
     return (
       <PDFViewer style={{ width: "100vw", height: "100vh" }}>
-        <DocumentTemplate data={transactions} week={week} />
+        <DocumentTemplate data={transactions} week={week} realdate={tarikh} />
       </PDFViewer>
     );
 };

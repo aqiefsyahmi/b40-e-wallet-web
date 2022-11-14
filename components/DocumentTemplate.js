@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 
-const DocumentTemplate = ({ data, week, dateTime }) => (
+const DocumentTemplate = ({ data, week, realdate }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.table}>
@@ -52,7 +52,8 @@ const DocumentTemplate = ({ data, week, dateTime }) => (
             </View>
           ))}
         </View>
-        <Text>{dateTime}</Text>
+        <Text> </Text>
+        <Text style={{ fontSize: 11 }}>This document printed on {realdate}</Text>
       </View>
     </Page>
   </Document>

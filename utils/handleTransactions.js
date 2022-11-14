@@ -105,4 +105,8 @@ export const displayTotal = ({ data, date }) => {
   return response;
 };
 
+const datastudent = ({ array, student, cafe }) => {
+
+}
+
 export default handleTransactions;
