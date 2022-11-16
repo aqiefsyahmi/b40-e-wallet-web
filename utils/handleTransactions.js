@@ -91,6 +91,7 @@ export const displayTotal = ({ data, date }) => {
     .map(dt => {
       const total = countTotal({ recipient: dt.recipient });
       return {
+        username: dt.username,
         recipient: dt.recipient,
         cafeName: dt.cafe_name,
         total: total,
@@ -103,10 +104,6 @@ export const displayTotal = ({ data, date }) => {
     }); // no 3
 
   return response;
-};
-
-export const allstudent = ({ data, date }) => {
-  //Function utk cari data student
 };
 
 export default handleTransactions;
