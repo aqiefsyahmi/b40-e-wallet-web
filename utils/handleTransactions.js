@@ -105,8 +105,8 @@ export const displayTotal = ({ data, date }) => {
   return response;
 };
 
-const datastudent = ({ array, student, cafe }) => {
-
-}
+export const allstudent = ({ data, date }) => {
+  //Function utk cari data student
+};
 
 export default handleTransactions;
