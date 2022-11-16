@@ -91,6 +91,7 @@ export const displayTotal = ({ data, date }) => {
     .map(dt => {
       const total = countTotal({ recipient: dt.recipient });
       return {
+        username: dt.username,
         recipient: dt.recipient,
         cafeName: dt.cafe_name,
         total: total,

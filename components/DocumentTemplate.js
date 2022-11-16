@@ -6,45 +6,45 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 
-const DocumentTemplate = ({ data, week }) => (
+const DocumentTemplate = ({ data, week, realdate }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.table}>
-        <Text style={{ fontSize: 24, marginBottom: 24, borderBottom: 2 }}>
-          Transactions {week}
+        <Text style={{ fontSize: 20, marginBottom: 24, borderBottom: 2, fontWeight: 100 }}>
+          eKupon UniSZA Transactions {week}
         </Text>
         <View
           style={[
             styles.table,
-            { borderTop: 2, borderRight: 2, borderLeft: 2 },
+            { fontSize: 11, borderTop: 1, borderRight: 1, borderLeft: 1 },
           ]}
         >
           <View
             style={{
               flexDirection: "row",
-              borderBottom: 2,
+              borderBottom: 1
             }}
           >
-            <Text style={[styles.tableCell, { borderRight: 2 }]}>No.</Text>
+            <Text style={[ styles.tableCell, { borderRight: 1 }]}>No.</Text>
             <Text
               style={[
                 styles.tableCell2,
-                { fontWeight: "bold", borderRight: 2, paddingLeft: 3 },
+                { borderRight: 1, paddingLeft: 3 },
               ]}
             >
               Cafe Name
             </Text>
-            <Text style={[styles.tableCell3, { fontWeight: "bold" }]}>
+            <Text style={[styles.tableCell3]}>
               Total(RM)
             </Text>
           </View>
           {data.map(({ cafeName, total }, i) => (
-            <View key={i} style={{ flexDirection: "row", borderBottom: 2 }}>
-              <Text style={[styles.tableCell, { borderRight: 2 }]}>
+            <View key={i} style={{ flexDirection: "row", borderBottom: 1 }}>
+              <Text style={[styles.tableCell, { borderRight: 1 }]}>
                 {i + 1}.
               </Text>
               <Text
-                style={[styles.tableCell2, { borderRight: 2, paddingLeft: 3 }]}
+                style={[styles.tableCell2, { borderRight: 1, paddingLeft: 3 }]}
               >
                 {cafeName}
               </Text>
@@ -52,6 +52,8 @@ const DocumentTemplate = ({ data, week }) => (
             </View>
           ))}
         </View>
+        <Text> </Text>
+        <Text style={{ fontSize: 11 }}>This document printed on {realdate}</Text>
       </View>
     </Page>
   </Document>

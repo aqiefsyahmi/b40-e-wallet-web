@@ -38,17 +38,25 @@ const transactions = () => {
             <tbody>
               {transactions &&
                 transactions.map((data, i) => {
-                  const { cafeName, total } = data;
+                  const { cafeName, total, username } = data;
 
                   return (
                     <tr key={i} className="text-gray-500">
                       <td className="pb-6 pr-4 text-center">{i + 1}.</td>
                       <td className="pb-6">{cafeName}</td>
                       <td className="pb-6 font-medium text-center">{total}</td>
+                      <td className="pb-6 text-center">
+                          <Link href={`/transactions/details/cafe/${username}`}>
+                            {/* <a className="py-2 px-5 font-medium text-center bg-[#E4E4E4] rounded-md transition duration-150 hover:bg-[#d1cfcf]"> */}
+                              Show Details
+                            {/* </a> */}
+                          </Link>
+                      </td>
                     </tr>
                   );
                 })}
               <tr>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td className="text-center">

@@ -1,17 +1,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { Layout } from "../../components";
+import { Layout, DateTime } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
 import { useTime } from "../../hooks";
 import { filteredDate } from "../../utils/handleTransactions";
-
-const dummyData = [
-  { id: 1, date: "1 Aug - 7 Aug" },
-  { id: 2, date: "8 Aug - 14 Aug" },
-  { id: 3, date: "15 Aug - 21 Aug" },
-  { id: 4, date: "22 Aug - 28 Aug" },
-];
 
 const transactions = () => {
   const [transactions, setTransactions] = useState([{}]);
