@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { Layout, Input } from "../../components";
+import { Layout } from "../../components";
 import { getTransactions } from "../../lib/getTransactions";
 import { useTime } from "../../hooks";
 import handleTransactions from "../../utils/handleTransactions";
 
 const transactions = () => {
   const [transactions, setTransactions] = useState([]);
-  const format = useTime();
 
   // Filter Student
   const [searchText, setSearchText] = useState("");
@@ -54,28 +53,25 @@ const transactions = () => {
                 </td>
               </tr>
             </thead>
-            {filteredstudent &&
-              filteredstudent.map((data, i) => {
+            <tbody>
+              {filteredstudent?.map((data, i) => {
                 const { student_name, matricNo, total } = data;
 
                 return (
-                  <tbody>
-                    <tr key={i} className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">{i + 1}.</td>
-                      <td className="pb-6">{student_name}</td>
-                      <td className="pb-6">{matricNo}</td>
-                      <td className="pb-6 font-medium text-center">{total}</td>
-                      <td className="pb-6">
-                          <Link href={`/transactions/details/student/studentdetails`}>
-                            {/* <a className="py-2 px-5 font-medium text-center bg-[#E4E4E4] rounded-md transition duration-150 hover:bg-[#d1cfcf]"> */}
-                              Show Details
-                            {/* </a> */}
-                          </Link>
-                        </td>
-                    </tr>
-                  </tbody>
+                  <tr key={i} className="text-gray-500">
+                    <td className="pb-6 pr-4 text-center">{i + 1}.</td>
+                    <td className="pb-6">{student_name}</td>
+                    <td className="pb-6">{matricNo}</td>
+                    <td className="pb-6 font-medium text-center">{total}</td>
+                    <td className="pb-6">
+                      <Link href={`/transactions/details/student/${matricNo}`}>
+                        Show Details
+                      </Link>
+                    </td>
+                  </tr>
                 );
               })}
+            </tbody>
           </table>
         </div>
       </div>
