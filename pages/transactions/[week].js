@@ -9,7 +9,7 @@ import { displayTotal } from "../../utils/handleTransactions";
 const transactions = () => {
   const router = useRouter();
   const { week } = router.query;
-  const [transactions, setTransactions] = useState([{}]);
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
