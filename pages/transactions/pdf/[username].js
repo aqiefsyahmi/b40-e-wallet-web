@@ -4,27 +4,20 @@ import { PDFViewer } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 import moment from "moment";
 
 import { DocumentTemplate } from "../../../components";
-import { getTransactions } from "../../../lib/getTransactions";
-import { displayTotal } from "../../../utils/handleTransactions";
+import { getTransactionCafeByUsername } from "../../../lib/getTransactions";
 
 const Pdf = () => {
   const router = useRouter();
-  const { week } = router.query;
+  const { week, username } = router.query;
   const [transactions, setTransactions] = useState([{}]);
-
-  var tarikh = moment().format('Do MMMM YYYY, h:mm a'); //date
+  const tarikh = moment().format("Do MMMM YYYY, hh:mm a"); //date
 
   useEffect(() => {
-    
-    const fetchData = async () => {
-
-      const res = await getTransactions();
-
-      setTransactions(displayTotal({ data: res, date: week }));
-    };
-
-    week !== undefined && fetchData();
-  }, [week]);
+    if (week)
+      getTransactionCafeByUsername(username)
+        .then(setTransactions)
+        .catch(err => console.log(err));
+  }, [week, username]);
 
   if (week !== undefined)
     return (
