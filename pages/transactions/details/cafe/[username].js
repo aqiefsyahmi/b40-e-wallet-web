@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import moment from "moment";
 import { Layout, Button } from "../../../../components";
@@ -89,15 +90,22 @@ const CafeTransaction = () => {
           {transactions[0]?.cafe_name}
         </h1>
         <div className="flex justify-between gap-3 items-center mb-3">
-          <select
-            value={selects.value}
-            onChange={onSelect}
-            className="py-2 px-3 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
-            <option value="all">All</option>
-            <option value="today">Today</option>
-            <option value="week">Week</option>
-            <option value="month">Month</option>
-          </select>
+          <div>
+            <select
+              value={selects.value}
+              onChange={onSelect}
+              className="py-2 px-3 mr-2 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+              <option value="all">All</option>
+              <option value="today">Today</option>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+            </select>
+            <Link href={`/transactions/pdf/${username}?week=today`}>
+              <a target="_blank" rel="noopener noreferrer">
+                <Button>Print</Button>
+              </a>
+            </Link>
+          </div>
           <div className="flex gap-2">
             <span className="py-2 px-3 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
               <label htmlFor="from" className="mr-2">
