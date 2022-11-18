@@ -4,27 +4,43 @@ import { PDFViewer } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 import moment from "moment";
 
 import { DocumentTemplate } from "../../../components";
-import { getTransactionCafeByUsername } from "../../../lib/getTransactions";
+import {
+  getTransactionCafeByUsername,
+  getTransactionsByRangeDate,
+} from "../../../lib/getTransactions";
+import { formatDate } from "../../../utils/formatTime";
 
 const Pdf = () => {
   const router = useRouter();
-  const { week, username } = router.query;
+  const { from, to, username } = router.query;
   const [transactions, setTransactions] = useState([{}]);
+  const [date, setDate] = useState();
   const tarikh = moment().format("Do MMMM YYYY, hh:mm a"); //date
 
   useEffect(() => {
-    if (week)
-      getTransactionCafeByUsername(username)
+    if (from) {
+      if (from == "all") {
+        getTransactionCafeByUsername(username)
+          .then(setTransactions)
+          .catch(err => console.log(err));
+
+        setDate("");
+        return;
+      }
+
+      setDate(`${formatDate(from)} - ${formatDate(to)}`);
+
+      getTransactionsByRangeDate(username, from, to)
         .then(setTransactions)
         .catch(err => console.log(err));
-  }, [week, username]);
+    }
+  }, [from, to, username]);
 
-  if (week !== undefined)
-    return (
-      <PDFViewer style={{ width: "100vw", height: "100vh" }}>
-        <DocumentTemplate data={transactions} week={week} realdate={tarikh} />
-      </PDFViewer>
-    );
+  return (
+    <PDFViewer style={{ width: "100vw", height: "100vh" }}>
+      <DocumentTemplate data={transactions} week={date} realdate={tarikh} />
+    </PDFViewer>
+  );
 };
 
 export default Pdf;
