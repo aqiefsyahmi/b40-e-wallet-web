@@ -1,186 +1,165 @@
-// import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
-// import Link from "next/link";
-
-// import { Layout, DateTime } from "../../../../components";
-
-// //get cafe data
-// import { getCafe } from "../../../../lib/getCafe";
-// import { getStudents } from "../../../../lib/getStudents";
-
-// const cafedata = () => {
-//   const router = useRouter();
-//   const { username } = router.query;
-//   const [cafeOwners, setCafe] = useState([]);
-
-//   // Filter CafeOwners Function
-//   const [searchText, setSearchText] = useState("");
-//   const filteredcafeowners = cafeOwners.filter(
-//     ({ username }) =>
-//     username.toLowerCase().includes(searchText.toLowerCase())
-//    );
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const res = await getCafe();
-//       setCafe(res);
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <Layout>
-//       <div className="w-2/3 items-center">
-//         <h1 className="mb-[30px] font-bold text-3xl">
-//           Transaction Cafe Details{username}
-//         </h1>
-//         <div className="p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
-//           <table className="centertable">
-//             <thead>
-//               <tr>
-//                 <td className="w-[6rem]"></td>
-//                 <td className="pb-[37px] font-medium">Cafe Name</td>
-//                 <td className="pb-[37px] font-medium">Sender</td>
-//                 <td className="pb-[37px] w-[8rem] font-medium">Payment(RM)</td>
-//                 <td className="pb-[37px] w-[8rem] font-medium">Date</td>
-//                 <td className="pb-[37px] w-[8rem] font-medium">Time</td>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {filteredcafeowners &&
-//                 filteredcafeowners.map((data, i) => {
-//                   const {cafe_name, username, date} = data;
-
-//                   return (
-//                     <tr className="text-gray-500">
-//                       <td className="pb-6 pr-4 text-center">{i + 1}.</td>
-//                       <td className="pb-6">{cafe_name}</td>
-//                       <td className="pb-6">{username}</td>
-//                       <td className="pb-6">2.00</td>
-//                       <td className="pb-6">6/9/1969</td>
-//                       <td className="pb-6">11:59:59</td>
-//                     </tr>
-//                   );
-//                 })}
-//             </tbody>
-//           </table>
-//         </div>
-//       </div>
-//     </Layout>
-//   );
-// };
-
-// export default cafedata;
-
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
-import { Layout, DateTime } from "../../../../components";
+import moment from "moment";
+import { Layout, Button } from "../../../../components";
 
-//get cafe data
-import { getCafe } from "../../../../lib/getCafe";
-import { getStudents } from "../../../../lib/getStudents";
+import {
+  getTransactionCafeByUsername,
+  getTransactionsByRangeDate,
+} from "../../../../lib/getTransactions";
 
-const cafedata = () => {
+import { formatDate, formatTime } from "../../../../utils/formatTime";
+import { countTotal } from "../../../../utils/countTotal";
+
+const CafeTransaction = () => {
   const router = useRouter();
   const { username } = router.query;
-  const [cafeOwners, setCafe] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [selects, setSelects] = useState({ value: "all" });
+  const [error, setError] = useState(false);
+  const dateFromRef = useRef();
+  const dateToRef = useRef();
 
-  // Filter CafeOwners Function
-  // const [searchText, setSearchText] = useState("");
-  // const filteredcafeowners = cafeOwners.filter(
-  //   ({ username }) =>
-  //   username.toLowerCase().includes(searchText.toLowerCase())
-  //  );
+  const onFilterDate = () => {
+    const from = dateFromRef.current.value;
+    const to = dateToRef.current.value;
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await getCafe();
-  //     setCafe(res);
-  //   };
+    getTransactionsByRangeDate(username, from, to)
+      .then(setTransactions)
+      .then(() => setError(false))
+      .catch(() => setError(true));
+  };
 
-  //   fetchData();
-  // }, []);
+  const fetchTransactionList = (from, to) => {
+    getTransactionsByRangeDate(username, from, to)
+      .then(setTransactions)
+      .then(() => setError(false))
+      .catch(() => setError(true));
+  };
+
+  const onSelect = e => {
+    let value = e.target.value;
+    setSelects({ value: value });
+
+    if (value === "all") {
+      getTransactionCafeByUsername(username)
+        .then(setTransactions)
+        .then(() => setError(false))
+        .catch(err => console.log(err));
+    }
+
+    if (value === "today") {
+      const today = moment().format("YYYY-MM-DD");
+      fetchTransactionList(today, today);
+    }
+
+    if (value === "week") {
+      const start = moment().startOf("week").format("YYYY-MM-DD");
+      const end = moment().endOf("week").format("YYYY-MM-DD");
+
+      fetchTransactionList(start, end);
+    }
+
+    if (value === "month") {
+      const start = moment().startOf("month").format("YYYY-MM-DD");
+      const end = moment().endOf("month").format("YYYY-MM-DD");
+
+      fetchTransactionList(start, end);
+    }
+  };
+
+  useEffect(() => {
+    if (username)
+      getTransactionCafeByUsername(username)
+        .then(res => {
+          const totalAmount = countTotal(res);
+
+          setTransactions(res);
+          setTotal(`${totalAmount}.00`);
+        })
+        .catch(() => setError(true));
+  }, [username]);
 
   return (
     <Layout>
-      <div className="w-2/3 items-center">
-        <h1 className="mb-[30px] font-bold text-3xl">
-          Transaction Cafe Details
+      <div className="w-2/3 items-center my-6">
+        <h1 className="mb-6 font-bold text-3xl">
+          {transactions[0]?.cafe_name}
         </h1>
+        <div className="flex justify-between gap-3 items-center mb-3">
+          <select
+            value={selects.value}
+            onChange={onSelect}
+            className="py-2 px-3 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+            <option value="all">All</option>
+            <option value="today">Today</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+          </select>
+          <div className="flex gap-2">
+            <span className="py-2 px-3 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+              <label htmlFor="from" className="mr-2">
+                From
+              </label>
+              <input type="date" id="from" ref={dateFromRef} />
+            </span>
+            <span className="py-2 px-3 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+              <label htmlFor="to" className="mr-2">
+                To
+              </label>
+              <input type="date" id="to" ref={dateToRef} />
+            </span>
+            <Button onAction={onFilterDate}>Find</Button>
+          </div>
+        </div>
         <div className="p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
               <tr>
                 <td className="w-[6rem]"></td>
-                <td className="pb-[37px] font-medium">Cafe Name</td>
                 <td className="pb-[37px] font-medium">Sender</td>
-                <td className="pb-[37px] w-[8rem] font-medium">Payment(RM)</td>
-                <td className="pb-[37px] w-[8rem] font-medium">Date</td>
-                <td className="pb-[37px] w-[8rem] font-medium">Time</td>
+                <td className="pb-[37px] font-medium">Date</td>
+                <td className="pb-[37px] font-medium text-center">
+                  Amount(RM)
+                </td>
               </tr>
             </thead>
             <tbody>
-                    <tr className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">1.</td>
-                      <td className="pb-6">Mamada Cafe</td>
-                      <td className="pb-6">Muhd Haziq</td>
-                      <td className="pb-6">2.00</td>
-                      <td className="pb-6">3rd November 2022</td>
-                      <td className="pb-6">2:09 pm</td>
+              {!error &&
+                transactions?.map((data, i) => {
+                  return (
+                    <tr className="text-gray-500" key={i}>
+                      <td className="pb-6 pr-4 text-center">{i + 1}.</td>
+                      <td className="pb-6">
+                        {data.student_name} ({data.sender})
+                      </td>
+                      <td className="pb-6">
+                        {formatDate(data.created_on)} -{" "}
+                        {formatTime(data.created_at)}
+                      </td>
+                      <td className="pb-6 text-center">{data.amount}</td>
                     </tr>
-                    <tr className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">1.</td>
-                      <td className="pb-6">Mamada Cafe</td>
-                      <td className="pb-6">Siti Fatimah</td>
-                      <td className="pb-6">1.00</td>
-                      <td className="pb-6">10th November 2022</td>
-                      <td className="pb-6">5:09 pm</td>
-                    </tr>
-                    <tr className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">1.</td>
-                      <td className="pb-6">Mamada Cafe</td>
-                      <td className="pb-6">Hazique Aiman</td>
-                      <td className="pb-6">2.00</td>
-                      <td className="pb-6">11th November 2022</td>
-                      <td className="pb-6">10:12 am</td>
-                    </tr>
-                    <tr className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">1.</td>
-                      <td className="pb-6">Mamada Cafe</td>
-                      <td className="pb-6">Muhd Haziq</td>
-                      <td className="pb-6">1.00</td>
-                      <td className="pb-6">13th November 2022</td>
-                      <td className="pb-6">12:09 pm</td>
-                    </tr>
-                    <tr className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">1.</td>
-                      <td className="pb-6">Mamada Cafe</td>
-                      <td className="pb-6">Muhammad Tarmizi</td>
-                      <td className="pb-6">2.00</td>
-                      <td className="pb-6">13th November 2022</td>
-                      <td className="pb-6">3:12 pm</td>
-                    </tr>
-                    <tr className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">1.</td>
-                      <td className="pb-6">Mamada Cafe</td>
-                      <td className="pb-6">Aqief SHESHH</td>
-                      <td className="pb-6">2.00</td>
-                      <td className="pb-6">20th November 2022</td>
-                      <td className="pb-6">12:12 pm</td>
-                    </tr>
-                    <tr className="text-gray-500">
-                      <td className="pb-6 pr-4 text-center">1.</td>
-                      <td className="pb-6">Mamada Cafe</td>
-                      <td className="pb-6">Aqief SHESHH</td>
-                      <td className="pb-6">2.00</td>
-                      <td className="pb-6">20th November 2022</td>
-                      <td className="pb-6">6:12 pm</td>
-                    </tr>
-
+                  );
+                })}
+              {!error && (
+                <tr>
+                  <td className="pb-6 text-right font-medium" colSpan={3}>
+                    Total
+                  </td>
+                  <td className="pb-6 text-center font-medium">{total}</td>
+                </tr>
+              )}
             </tbody>
+            {error && (
+              <tr className="text-gray-500">
+                <td className="pb-6 pr-4 text-center">1.</td>
+                <td className="pb-6">Not found</td>
+                <td className="pb-6">Not found</td>
+                <td className="pb-6 text-center">Not found</td>
+              </tr>
+            )}
           </table>
         </div>
       </div>
@@ -188,4 +167,4 @@ const cafedata = () => {
   );
 };
 
-export default cafedata;
+export default CafeTransaction;
