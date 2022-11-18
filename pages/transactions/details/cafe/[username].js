@@ -20,6 +20,7 @@ const CafeTransaction = () => {
   const [total, setTotal] = useState(0);
   const [selects, setSelects] = useState({ value: "all" });
   const [error, setError] = useState(false);
+  const [date, setDate] = useState([" ", " "]);
   const dateFromRef = useRef();
   const dateToRef = useRef();
 
@@ -29,6 +30,7 @@ const CafeTransaction = () => {
 
     getTransactionsByRangeDate(username, from, to)
       .then(setTransactions)
+      .then(() => setDate([from, to]))
       .then(() => setError(false))
       .catch(() => setError(true));
   };
@@ -36,10 +38,11 @@ const CafeTransaction = () => {
   const fetchTransactionList = (from, to) => {
     getTransactionsByRangeDate(username, from, to)
       .then(setTransactions)
+      .then(() => setDate([from, to]))
       .then(() => setError(false))
       .catch(() => setError(true));
   };
-
+  console.log(date);
   const onSelect = e => {
     let value = e.target.value;
     setSelects({ value: value });
@@ -47,6 +50,7 @@ const CafeTransaction = () => {
     if (value === "all") {
       getTransactionCafeByUsername(username)
         .then(setTransactions)
+        .then(() => setDate(["all", "all"]))
         .then(() => setError(false))
         .catch(err => console.log(err));
     }
@@ -78,6 +82,7 @@ const CafeTransaction = () => {
           const totalAmount = countTotal(res);
 
           setTransactions(res);
+          setDate("all");
           setTotal(`${totalAmount}.00`);
         })
         .catch(() => setError(true));
@@ -100,7 +105,8 @@ const CafeTransaction = () => {
               <option value="week">Week</option>
               <option value="month">Month</option>
             </select>
-            <Link href={`/transactions/pdf/${username}?week=today`}>
+            <Link
+              href={`/transactions/pdf/${username}?from=${date[0]}&to=${date[1]}`}>
               <a target="_blank" rel="noopener noreferrer">
                 <Button>Print</Button>
               </a>
