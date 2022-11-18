@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { Layout } from "../../components";
-import { getTransactions } from "../../lib/getTransactions";
-import { useTime } from "../../hooks";
-import handleTransactions from "../../utils/handleTransactions";
+import { getStudents } from "../../lib/getStudents";
 
 const transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -12,24 +10,20 @@ const transactions = () => {
   // Filter Student
   const [searchText, setSearchText] = useState("");
   const filteredstudent = transactions.filter(
-    ({ student_name, matricNo }) =>
+    ({ student_name, matric_no }) =>
       student_name.toLowerCase().includes(searchText.toLowerCase()) ||
-      matricNo.toLowerCase().includes(searchText.toLowerCase())
+      matric_no.toLowerCase().includes(searchText.toLowerCase())
   );
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getTransactions();
-
-      setTransactions(handleTransactions({ array: res, student: true }));
-    };
-
-    fetchData();
+    getStudents()
+      .then(setTransactions)
+      .catch(err => console.log(err));
   }, []);
 
   return (
     <Layout>
-      <div className="w-2/3 items-center">
+      <div className="w-2/3 items-center my-6">
         <h1 className="mb-[30px] font-bold text-3xl">
           Transactions List (Students)
         </h1>
@@ -47,24 +41,19 @@ const transactions = () => {
               <tr>
                 <td className="w-[6rem]"></td>
                 <td className="pb-[37px] font-medium">Student Name</td>
-                <td className="pb-[37px] font-medium">Matric No.</td>
-                <td className="pb-[37px] w-[14rem] font-medium text-center">
-                  Total(RM)
-                </td>
               </tr>
             </thead>
             <tbody>
               {filteredstudent?.map((data, i) => {
-                const { student_name, matricNo, total } = data;
-
                 return (
                   <tr key={i} className="text-gray-500">
                     <td className="pb-6 pr-4 text-center">{i + 1}.</td>
-                    <td className="pb-6">{student_name}</td>
-                    <td className="pb-6">{matricNo}</td>
-                    <td className="pb-6 font-medium text-center">{total}</td>
                     <td className="pb-6">
-                      <Link href={`/transactions/details/student/${matricNo}`}>
+                      {data.student_name} ({data.matric_no})
+                    </td>
+                    <td className="pb-6">
+                      <Link
+                        href={`/transactions/details/student/${data.matric_no}`}>
                         Show Details
                       </Link>
                     </td>
