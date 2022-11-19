@@ -82,7 +82,7 @@ const CafeTransaction = () => {
           const totalAmount = countTotal(res);
 
           setTransactions(res);
-          setDate("all");
+          setDate(["all", "all"]);
           setTotal(`${totalAmount}.00`);
         })
         .catch(() => setError(true));
