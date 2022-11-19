@@ -95,6 +95,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRight: 0,
   },
+  tableCell4: {
+    textAlign: "right",
+    flex: 4.21,
+  },
+  image: {
+    width: "50%",
+    padding: 10
+  },
 });
 
 export default DocumentTemplate;

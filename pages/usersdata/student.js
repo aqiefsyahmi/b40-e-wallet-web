@@ -42,11 +42,13 @@ const Studentsdata = () => {
           <table className="centertable">
             <thead>
               <tr>
-                <th className="text-center w-[2rem]"></th>
-                <th className="text-left">Name</th>
-                <th className="text-left">Matric Number</th>
-                <th className="text-left">IC Number</th>
-                <th className="text-left">Balance(RM)</th>
+                <th className="text-center w-[2rem] pb-[37px]"></th>
+                <th className="text-left pb-[37px] font-medium">Name</th>
+                <th className="text-left pb-[37px] font-medium">
+                  Matric Number
+                </th>
+                <th className="text-left pb-[37px] font-medium">IC Number</th>
+                <th className="text-left pb-[37px] font-medium">Balance(RM)</th>
               </tr>
             </thead>
             <tbody>
@@ -56,12 +58,12 @@ const Studentsdata = () => {
                     data;
 
                   return (
-                    <tr key={i}>
-                      <td className="text-center">{i + 1}.</td>
-                      <td>{student_name}</td>
-                      <td>{matric_no}</td>
-                      <td>{ic_no}</td>
-                      <td>{wallet_amount}</td>
+                    <tr key={i} className="text-gray-500">
+                      <td className="pb-6 pr-4 text-center">{i + 1}.</td>
+                      <td className="pb-6">{student_name}</td>
+                      <td className="pb-6">{matric_no}</td>
+                      <td className="pb-6">{ic_no}</td>
+                      <td className="pb-6">{wallet_amount}</td>
                     </tr>
                   );
                 })}
