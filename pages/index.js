@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import instance from "./api/instance";
-import { useLocalStorage } from "../hooks";
+import handleLocalStorage from "../utils/handleLocalStorage";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -13,7 +13,7 @@ const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { store } = useLocalStorage();
+  const { store } = handleLocalStorage();
 
   const handleLogin = e => {
     e.preventDefault();
