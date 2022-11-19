@@ -1,5 +1,5 @@
 import axios from "axios";
-import { handleLocalStorage } from "../../utils/handleLocalStorage";
+import handleLocalStorage from "../../utils/handleLocalStorage";
 
 const { getItem, store } = handleLocalStorage();
 

@@ -1,3 +1,3 @@
 import { useTime } from "./useTime";
 
-export { useLocalStorage, useTime };
+export { useTime };

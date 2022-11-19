@@ -3,13 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Button from "./Button";
-import { useLocalStorage } from "../hooks";
+import handleLocalStorage from "../utils/handleLocalStorage";
 
 import { logo } from "../assets";
 
 const NavBar = () => {
   const router = useRouter();
-  const { remove } = useLocalStorage();
+  const { remove } = handleLocalStorage();
   const [showDrop, setShowDrop] = useState(false);
   const [showDrop1, setShowDrop1] = useState(false);
   const [showDrop2, setShowDrop2] = useState(false);
