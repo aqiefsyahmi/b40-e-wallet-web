@@ -42,7 +42,7 @@ const CafeTransaction = () => {
       .then(() => setError(false))
       .catch(() => setError(true));
   };
-  console.log(date);
+
   const onSelect = e => {
     let value = e.target.value;
     setSelects({ value: value });
