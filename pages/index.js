@@ -9,7 +9,7 @@ import Button from "../components/Button";
 
 import { emailIcon, passwordIcon, logo } from "../assets/index";
 
-const login = () => {
+const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -82,4 +82,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
