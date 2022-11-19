@@ -24,165 +24,148 @@ const NavBar = () => {
   return (
     <nav className="px-4 flex justify-between items-center justify-self-stretch bg-white border-b">
       <img src={logo.src} alt="" className="w-[8rem]" />
-      <ul className="py-6 flex items-center justify-center gap-6 ">
-        <li
-          className={router.pathname != "/dashboard" ? "active" : "font-bold"}
-        >
+      <div className="py-6 flex items-center justify-center gap-6 ">
+        <div
+          className={router.pathname != "/dashboard" ? "active" : "font-bold"}>
           <div className="duration-150 hover:font-bold">
             <Link href="/dashboard">Home</Link>
           </div>
-        </li>
-        <li
+        </div>
+        <div
           className="relative cursor-pointer"
           onMouseEnter={() => setShowDrop(true)}
-          onMouseLeave={() => setShowDrop(false)}
-        >
-          <li
-            className={router.pathname != "/addCafe" ? "active" : "font-bold"}
-          >
-            <li
+          onMouseLeave={() => setShowDrop(false)}>
+          <div
+            className={router.pathname != "/addCafe" ? "active" : "font-bold"}>
+            <div
               className={
                 router.pathname != "/addStudent" ? "active" : "font-bold"
-              }
-            >
+              }>
               <div className="duration-150 hover:font-bold">Registrations</div>
-            </li>
-          </li>
+            </div>
+          </div>
           <div className={`absolute ${!showDrop && `hidden`}`}>
             <div className="py-3 grid w-[8rem] gap-2 rounded-md bg-white shadow ">
-              <li
+              <div
                 className={
                   router.pathname != "/addCafe" ? "active" : "font-semibold"
-                }
-              >
+                }>
                 <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
                   <div className="grid justify-center duration-150 hover:font-semibold">
                     <Link href="/addCafe">Cafe Owner</Link>
                   </div>
                 </div>
-              </li>
-              <li
+              </div>
+              <div
                 className={
                   router.pathname != "/addStudent" ? "active" : "font-semibold"
-                }
-              >
+                }>
                 <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
                   <div className="ml-6 duration-150 hover:font-semibold">
                     <Link href="/addStudent">Student</Link>
                   </div>
                 </div>
-              </li>
+              </div>
             </div>
           </div>
-        </li>
-        <li
+        </div>
+        <div
           className="relative cursor-pointer"
           onMouseEnter={() => setShowDrop1(true)}
-          onMouseLeave={() => setShowDrop1(false)}
-        >
-          <li
+          onMouseLeave={() => setShowDrop1(false)}>
+          <div
             className={
               router.pathname != "/usersdata/cafe" ? "active" : "font-bold"
-            }
-          >
-            <li
+            }>
+            <div
               className={
                 router.pathname != "/usersdata/student" ? "active" : "font-bold"
-              }
-            >
+              }>
               <div className="duration-150 hover:font-bold">Users Data</div>
-            </li>
-          </li>
+            </div>
+          </div>
           <div className={`absolute ${!showDrop1 && `hidden`}`}>
             <div className="py-3 grid w-[8rem] gap-2 rounded-md bg-white shadow ">
-              <li
+              <div
                 className={
                   router.pathname != "/usersdata/cafe"
                     ? "active"
                     : "font-semibold"
-                }
-              >
+                }>
                 <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
                   <div className="grid justify-center duration-150 hover:font-semibold">
                     <Link href="/usersdata/cafe">Cafe Owner</Link>
                   </div>
                 </div>
-              </li>
-              <li
+              </div>
+              <div
                 className={
                   router.pathname != "/usersdata/student"
                     ? "active"
                     : "font-semibold"
-                }
-              >
+                }>
                 <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
                   <div className="ml-6 duration-150 hover:font-semibold">
                     <Link href="/usersdata/student">Student</Link>
                   </div>
                 </div>
-              </li>
+              </div>
             </div>
           </div>
-        </li>
-        <li
-          className={router.pathname != "/addWallet" ? "active" : "font-bold"}
-        >
+        </div>
+        <div
+          className={router.pathname != "/addWallet" ? "active" : "font-bold"}>
           <div className="duration-150 hover:font-bold">
             <Link href="/addWallet">E-Wallet Point</Link>
           </div>
-        </li>
-        <li
+        </div>
+        <div
           className="relative cursor-pointer"
           onMouseEnter={() => setShowDrop2(true)}
-          onMouseLeave={() => setShowDrop2(false)}
-        >
-          <li
+          onMouseLeave={() => setShowDrop2(false)}>
+          <div
             className={
               router.pathname != "/transactions/cafe" ? "active" : "font-bold"
-            }
-          >
-            <li
+            }>
+            <div
               className={
                 router.pathname != "/transactions/student"
                   ? "active"
                   : "font-bold"
-              }
-            >
+              }>
               <div className="duration-150 hover:font-bold">Transactions</div>
-            </li>
-          </li>
+            </div>
+          </div>
           <div className={`absolute ${!showDrop2 && `hidden`}`}>
             <div className="py-3 grid justify-center w-[8rem] gap-2 rounded-md bg-white shadow">
-              <li
+              <div
                 className={
                   router.pathname != "/transactions/cafe"
                     ? "active"
                     : "font-semibold"
-                }
-              >
+                }>
                 <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
                   <div className="grid justify-center duration-150 hover:font-semibold">
                     <Link href="/transactions/cafe">Cafe Owners</Link>
                   </div>
                 </div>
-              </li>
-              <li
+              </div>
+              <div
                 className={
                   router.pathname != "/transactions/student"
                     ? "active"
                     : "font-semibold"
-                }
-              >
+                }>
                 <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
                   <div className="ml-5 duration-150 hover:font-semibold">
                     <Link href="/transactions/student">Students</Link>
                   </div>
                 </div>
-              </li>
+              </div>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
       <div>
         <Button onAction={onLogout}>Logout</Button>
       </div>

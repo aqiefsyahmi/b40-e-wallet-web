@@ -4,7 +4,7 @@ const handleTransactions = ({ array, student, cafe }) => {
   // kira total
   const countTotal = ({ sender, recipient }) => {
     let total = 0;
-    array.map(data => {
+    array.forEach(data => {
       if (sender && data.sender === sender) total += parseInt(data.amount);
       if (recipient && data.recipient === recipient)
         total += parseInt(data.amount);
@@ -58,7 +58,7 @@ export const filteredDate = ({ data }) => {
       const dates = arr.map(({ date }) => date);
       return !dates.includes(date, i + 1);
     });
-    
+
   return response;
 };
 
@@ -91,6 +91,7 @@ export const displayTotal = ({ data, date }) => {
     .map(dt => {
       const total = countTotal({ recipient: dt.recipient });
       return {
+        username: dt.username,
         recipient: dt.recipient,
         cafeName: dt.cafe_name,
         total: total,
