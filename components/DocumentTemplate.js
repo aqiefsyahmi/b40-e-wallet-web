@@ -4,77 +4,96 @@ import {
   Text,
   View,
   StyleSheet,
+  Image,
 } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+import { logo } from "../assets";
 
-const DocumentTemplate = ({ data, week }) => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      <View style={styles.table}>
-        <Text style={{ fontSize: 24, marginBottom: 24, borderBottom: 2 }}>
-          Transactions {week}
-        </Text>
-        <View
-          style={[
-            styles.table,
-            { borderTop: 2, borderRight: 2, borderLeft: 2 },
-          ]}
-        >
-          <View
+const DocumentTemplate = ({ data, week, realdate }) => {
+  return (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.table}>
+          <Image src={logo.src} style={{ width: 140 }} />
+          <Text
             style={{
-              flexDirection: "row",
-              borderBottom: 2,
-            }}
-          >
-            <Text style={[styles.tableCell, { borderRight: 2 }]}>No.</Text>
-            <Text
-              style={[
-                styles.tableCell2,
-                { fontWeight: "bold", borderRight: 2, paddingLeft: 3 },
-              ]}
-            >
-              Cafe Name
-            </Text>
-            <Text style={[styles.tableCell3, { fontWeight: "bold" }]}>
-              Total(RM)
-            </Text>
-          </View>
-          {data.map(({ cafeName, total }, i) => (
-            <View key={i} style={{ flexDirection: "row", borderBottom: 2 }}>
-              <Text style={[styles.tableCell, { borderRight: 2 }]}>
-                {i + 1}.
+              paddingBottom: 16,
+              marginBottom: 24,
+              borderBottom: 1,
+              fontSize: 12,
+              fontWeight: 100,
+            }}>
+            eKupon UniSZA Transactions {week}
+          </Text>
+          <View
+            style={[
+              styles.table,
+              { fontSize: 11, borderTop: 1, borderRight: 1, borderLeft: 1 },
+            ]}>
+            <View
+              style={{
+                flexDirection: "row",
+                borderBottom: 1,
+              }}>
+              <Text style={[styles.column, styles.column1]}>No.</Text>
+              <Text style={[styles.column, styles.column2]}>
+                Transaction Id
               </Text>
-              <Text
-                style={[styles.tableCell2, { borderRight: 2, paddingLeft: 3 }]}
-              >
-                {cafeName}
-              </Text>
-              <Text style={[styles.tableCell3]}>{total}</Text>
+              <Text style={[styles.column, styles.column3]}>Sender</Text>
+              <Text style={[styles.column, styles.column4]}>Amount(RM)</Text>
             </View>
-          ))}
+            {data?.map((transaction, i) => (
+              <View key={i} style={{ flexDirection: "row", borderBottom: 1 }}>
+                <Text style={[styles.column, styles.column1]}>{i + 1}.</Text>
+                <Text style={[styles.column, styles.column2]}>
+                  {transaction.transaction_id}
+                </Text>
+                <Text style={[styles.column, styles.column3]}>
+                  {transaction.student_name}
+                </Text>
+                <Text style={[styles.column, styles.column4]}>
+                  {transaction.amount}
+                </Text>
+              </View>
+            ))}
+          </View>
+          <Text style={{ fontSize: 11, marginTop: 24 }}>
+            This document printed on {realdate}
+          </Text>
         </View>
-      </View>
-    </Page>
-  </Document>
-);
+      </Page>
+    </Document>
+  );
+};
 
 const styles = StyleSheet.create({
   page: {
     paddingHorizontal: 16,
-    paddingVertical: 24,
+    paddingTop: 24,
   },
   table: {
     flexWrap: "wrap",
   },
-  tableCell: {
+  column: {
+    paddingHorizontal: 6,
+    paddingVertical: 3,
+    borderRight: 1,
+    fontSize: 10,
+  },
+  column1: {
+    // width: 38,
     flex: 1,
     textAlign: "center",
   },
-  tableCell2: {
-    flex: 4,
+  column2: {
+    flex: 8,
   },
-  tableCell3: {
+  column3: {
+    flex: 8,
+  },
+  column4: {
     flex: 2,
     textAlign: "center",
+    borderRight: 0,
   },
 });
 

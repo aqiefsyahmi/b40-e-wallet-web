@@ -14,7 +14,7 @@ const addWallet = () => {
   const [students, setStudents] = useState([]);
   const [amount, setAmount] = useState("");
 
-  // Filter Students
+  // Filter Students Function
   const [searchText, setSearchText] = useState("");
   const filteredstudent = students.filter(
     ({ student_name, matric_no, ic_no }) =>
@@ -33,6 +33,7 @@ const addWallet = () => {
     fetchData();
   }, []);
 
+  // Checkbox all function
   const handleCheckedAll = (e) => {
     setIsCheckAll(!isCheckedAll);
     setIsChecked(students.map((data) => data.matric_no));
@@ -40,6 +41,7 @@ const addWallet = () => {
     if (isCheckedAll) setIsChecked([]);
   };
 
+  // Checkbox function checked
   const handleChecked = (e) => {
     const { checked, id } = e.target;
     setIsChecked([...isChecked, id]);
@@ -47,6 +49,7 @@ const addWallet = () => {
     if (!checked) setIsChecked(isChecked.filter((item) => item !== id));
   };
 
+  //Checkbox if the box checked
   const handleSetAmount = () => {
     const data = isChecked.map((matricNo) => {
       const fetchData = async () => {
