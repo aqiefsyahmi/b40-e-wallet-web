@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import { getStudents } from "../lib/getStudents";
 import { setWallet as updateWallet } from "../lib/setWallet";
 
-const addWallet = () => {
+const AddWallet = () => {
   const router = useRouter();
   const [isCheckedAll, setIsCheckAll] = useState(false);
   const [isChecked, setIsChecked] = useState([]);
@@ -34,24 +34,24 @@ const addWallet = () => {
   }, []);
 
   // Checkbox all function
-  const handleCheckedAll = (e) => {
+  const handleCheckedAll = e => {
     setIsCheckAll(!isCheckedAll);
-    setIsChecked(students.map((data) => data.matric_no));
+    setIsChecked(students.map(data => data.matric_no));
 
     if (isCheckedAll) setIsChecked([]);
   };
 
   // Checkbox function checked
-  const handleChecked = (e) => {
+  const handleChecked = e => {
     const { checked, id } = e.target;
     setIsChecked([...isChecked, id]);
 
-    if (!checked) setIsChecked(isChecked.filter((item) => item !== id));
+    if (!checked) setIsChecked(isChecked.filter(item => item !== id));
   };
 
   //Checkbox if the box checked
   const handleSetAmount = () => {
-    const data = isChecked.map((matricNo) => {
+    const data = isChecked.map(matricNo => {
       const fetchData = async () => {
         const res = await updateWallet(matricNo, amount);
         if (res == 200) return true;
@@ -130,7 +130,7 @@ const addWallet = () => {
             <Input
               type="number"
               value={amount}
-              onAction={(e) => setAmount(e.target.value)}
+              onAction={e => setAmount(e.target.value)}
             />
           </div>
           <Button onAction={handleSetAmount}>Add Point</Button>
@@ -140,4 +140,4 @@ const addWallet = () => {
   );
 };
 
-export default addWallet;
+export default AddWallet;
