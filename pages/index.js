@@ -9,13 +9,13 @@ import Button from "../components/Button";
 
 import { emailIcon, passwordIcon, logo } from "../assets/index";
 
-const login = () => {
+const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { store } = useLocalStorage();
 
-  const handleLogin = (e) => {
+  const handleLogin = e => {
     e.preventDefault();
 
     instance
@@ -23,16 +23,14 @@ const login = () => {
         email: email,
         password: password,
       })
-      .then((res) => {
+      .then(res => {
         store("accessToken", res.data.accessToken);
         store("refreshToken", res.data.refreshToken);
 
         router.push("/dashboard");
       })
-      .catch((err) => {
-        if (err.response.status) {
-          return alert("Wrong email or password");
-        }
+      .catch(err => {
+        alert("Wrong email or password");
       });
   };
 
@@ -54,7 +52,7 @@ const login = () => {
               <Input
                 type="email"
                 value={email}
-                onAction={(e) => setEmail(e.target.value)}
+                onAction={e => setEmail(e.target.value)}
                 placeholder="Enter Your Email..."
               />
               <img
@@ -65,7 +63,7 @@ const login = () => {
               <Input
                 type="password"
                 value={password}
-                onAction={(e) => setPassword(e.target.value)}
+                onAction={e => setPassword(e.target.value)}
                 placeholder="Enter Your Password..."
               />
             </div>
@@ -84,4 +82,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

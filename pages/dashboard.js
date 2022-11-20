@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { getSumamary } from "../lib/getSummary";
 
-const dashboard = () => {
+const Dashboard = () => {
   const [summary, setSummary] = useState({
     students: undefined,
     cafe: undefined,
@@ -63,4 +63,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default Dashboard;
