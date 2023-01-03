@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 
 import { getCafe } from "../../lib/getCafe";
 
-const Cafeownersdata = () => {
+const Cafe = () => {
   const router = useRouter();
   const [cafeOwners, setCafe] = useState([]);
 
@@ -38,7 +38,7 @@ const Cafeownersdata = () => {
           placeholder="Search for name, username or cafe name"
           onChange={({ target }) => setSearchText(target.value)}
         />
-        <div className="mt-4 p-4 pt-0 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+        <div className="mt-4 p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
               <tr>
@@ -70,4 +70,4 @@ const Cafeownersdata = () => {
   );
 };
 
-export default Cafeownersdata;
+export default Cafe;

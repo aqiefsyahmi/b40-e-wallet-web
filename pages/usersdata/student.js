@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 
 import { getStudents } from "../../lib/getStudents";
 
-const Studentsdata = () => {
+const Student = () => {
   const router = useRouter();
   const [students, setStudents] = useState([]);
 
@@ -38,7 +38,7 @@ const Studentsdata = () => {
           placeholder="Search for name, matric number or ic number"
           onChange={({ target }) => setSearchText(target.value)}
         />
-        <div className="mt-4 p-4 pt-0 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
+        <div className="mt-4 p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
           <table className="centertable">
             <thead>
               <tr>
@@ -75,4 +75,4 @@ const Studentsdata = () => {
   );
 };
 
-export default Studentsdata;
+export default Student;

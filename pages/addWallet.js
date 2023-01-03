@@ -51,21 +51,15 @@ const AddWallet = () => {
 
   //Checkbox if the box checked
   const handleSetAmount = () => {
-    const data = isChecked.map(matricNo => {
-      const fetchData = async () => {
-        const res = await updateWallet(matricNo, amount);
-        if (res == 200) return true;
-      };
-      return fetchData();
+    const data = isChecked.map(async matricNo => {
+      return await updateWallet(matricNo, amount);
     });
 
-    if (data) {
+    Promise.all(data).then(() => {
       alert("Successful");
       router.push("/dashboard");
-    }
+    });
   };
-
-  console.log(isChecked);
 
   return (
     <Layout>

@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "50%",
-    padding: 10
+    padding: 10,
   },
 });
 
