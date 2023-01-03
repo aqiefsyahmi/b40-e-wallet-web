@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useLocalStorage } from "../../hooks";
+import handleLocalStorage from "../../utils/handleLocalStorage";
 
-const { getItem, store } = useLocalStorage();
+const { getItem, store } = handleLocalStorage();
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,
-  // || "http://localhost:3000"
+
   headers: {
     "Content-Type": "application/json",
   },
@@ -13,11 +13,11 @@ const instance = axios.create({
 
 // Request interceptors for API calls
 instance.interceptors.request.use(
-  (config) => {
+  config => {
     config.headers["Authorization"] = `Bearer ${getItem("accessToken")}`;
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
   }
 );
@@ -25,27 +25,28 @@ instance.interceptors.request.use(
 // refresh token implementation
 const getRefreshToken = async () => {
   try {
-    const response = instance.post('/token', { refreshToken: getItem("refreshToken") })
-    store('accessToken', response.data.accessToken)
-
+    const response = instance.post("/token", {
+      refreshToken: getItem("refreshToken"),
+    });
+    store("accessToken", response.data.accessToken);
   } catch (error) {
-    console.warn('error refresh', error)
+    console.warn("error refresh", error);
   }
-}
+};
 
 instance.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
-  async (error) => {
-    const originalRequest = error.config
+  async error => {
+    const originalRequest = error.config;
     if (error.response.status == 403) {
       await getRefreshToken();
 
       // return prev request
-      return instance(originalRequest)
+      return instance(originalRequest);
     }
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
 );
 

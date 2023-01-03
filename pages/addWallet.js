@@ -94,12 +94,13 @@ const AddWallet = () => {
                 <th className="text-left">Balance(RM)</th>
               </tr>
             </thead>
-            {filteredstudent &&
-              filteredstudent.map((data, i) => {
-                const { student_name, matric_no, ic_no, wallet_amount } = data;
+            <tbody>
+              {filteredstudent &&
+                filteredstudent.map((data, i) => {
+                  const { student_name, matric_no, ic_no, wallet_amount } =
+                    data;
 
-                return (
-                  <tbody>
+                  return (
                     <tr key={i}>
                       <td className="py-1 text-center w-[7%]">
                         <input
@@ -114,9 +115,9 @@ const AddWallet = () => {
                       <td>{ic_no}</td>
                       <td>{wallet_amount}</td>
                     </tr>
-                  </tbody>
-                );
-              })}
+                  );
+                })}
+            </tbody>
           </table>
         </div>
         <div className="mt-6 flex justify-end gap-2">
