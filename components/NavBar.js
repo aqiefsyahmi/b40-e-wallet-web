@@ -4,21 +4,29 @@ import { useRouter } from "next/router";
 
 import Button from "./Button";
 import handleLocalStorage from "../utils/handleLocalStorage";
+import { logout } from "../lib/logout";
 
 import { logo } from "../assets";
 
 const NavBar = () => {
   const router = useRouter();
-  const { remove } = handleLocalStorage();
+  const { remove, getItem } = handleLocalStorage();
   const [showDrop, setShowDrop] = useState(false);
   const [showDrop1, setShowDrop1] = useState(false);
   const [showDrop2, setShowDrop2] = useState(false);
 
-  const onLogout = () => {
-    remove("accessToken");
-    remove("refreshToken");
+  const onLogout = async () => {
+    try {
+      const refreshToken = getItem("refreshToken");
 
-    router.push("/");
+      await logout(refreshToken);
+      remove("accessToken");
+      remove("refreshToken");
+
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
