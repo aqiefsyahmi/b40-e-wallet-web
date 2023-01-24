@@ -3,22 +3,30 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Button from "./Button";
-import { useLocalStorage } from "../hooks";
+import handleLocalStorage from "../utils/handleLocalStorage";
+import { logout } from "../lib/logout";
 
 import { logo } from "../assets";
 
 const NavBar = () => {
   const router = useRouter();
-  const { remove } = useLocalStorage();
+  const { remove, getItem } = handleLocalStorage();
   const [showDrop, setShowDrop] = useState(false);
   const [showDrop1, setShowDrop1] = useState(false);
   const [showDrop2, setShowDrop2] = useState(false);
 
-  const onLogout = () => {
-    remove("accessToken");
-    remove("refreshToken");
+  const onLogout = async () => {
+    try {
+      const refreshToken = getItem("refreshToken");
 
-    router.push("/");
+      await logout(refreshToken);
+      remove("accessToken");
+      remove("refreshToken");
+
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -138,6 +146,18 @@ const NavBar = () => {
           </div>
           <div className={`absolute ${!showDrop2 && `hidden`}`}>
             <div className="py-3 grid justify-center w-[8rem] gap-2 rounded-md bg-white shadow">
+              <div
+                className={
+                  router.pathname != "/transactions/student"
+                    ? "active"
+                    : "font-semibold"
+                }>
+                <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
+                  <div className="ml-5 duration-150 hover:font-semibold">
+                    <Link href="/transactions/allCafe">All Cafe</Link>
+                  </div>
+                </div>
+              </div>
               <div
                 className={
                   router.pathname != "/transactions/cafe"

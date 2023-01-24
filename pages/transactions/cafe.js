@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Layout } from "../../components";
 import { getCafe } from "../../lib/getCafe";
 
-const transactions = () => {
+const Transactions = () => {
   const [transactions, setTransactions] = useState([{}]);
 
   useEffect(() => {
@@ -50,4 +50,4 @@ const transactions = () => {
   );
 };
 
-export default transactions;
+export default Transactions;
