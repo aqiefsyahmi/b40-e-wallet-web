@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useLocalStorage } from "../../hooks";
+import handleLocalStorage from "../../utils/handleLocalStorage";
 
-const { getItem, store } = useLocalStorage();
+const { getItem, store } = handleLocalStorage();
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Layout } from "../../components";
 import { getStudents } from "../../lib/getStudents";
 
-const transactions = () => {
+const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
 
   // Filter Student
@@ -68,4 +68,4 @@ const transactions = () => {
   );
 };
 
-export default transactions;
+export default Transactions;

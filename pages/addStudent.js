@@ -5,13 +5,13 @@ import Layout from "../components/Layout";
 import Input from "../components/Input";
 import { setStudent } from "../lib/setStudent";
 
-const addStudent = () => {
+const AddStudent = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [matricNo, setMatric] = useState("");
   const [icNo, setIcNo] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     // validation
@@ -55,7 +55,7 @@ const addStudent = () => {
               type="text"
               placeholder="Full Name"
               value={name}
-              onAction={(e) => setName(e.target.value)}
+              onAction={e => setName(e.target.value)}
               required={true}
               maxlength={100}
             />
@@ -64,7 +64,7 @@ const addStudent = () => {
               type="text"
               placeholder="Matric Number e.g xxxxxx"
               value={matricNo}
-              onAction={(e) => setMatric(e.target.value)}
+              onAction={e => setMatric(e.target.value)}
               required={true}
               maxlength={6}
             />
@@ -73,15 +73,14 @@ const addStudent = () => {
               type="text"
               placeholder="IC Number e.g xxxxxxxxxxxx"
               value={icNo}
-              onAction={(e) => setIcNo(e.target.value)}
+              onAction={e => setIcNo(e.target.value)}
               required={true}
               maxlength={12}
             />
           </div>
           <button
             type="submit"
-            className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md transition duration-150 hover:bg-[#d6b513]"
-          >
+            className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md transition duration-150 hover:bg-[#d6b513]">
             Register
           </button>
         </form>
@@ -90,4 +89,4 @@ const addStudent = () => {
   );
 };
 
-export default addStudent;
+export default AddStudent;

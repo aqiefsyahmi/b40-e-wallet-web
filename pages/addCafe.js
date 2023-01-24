@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 import { Input, Layout } from "../components";
 import { setCafe } from "../lib/setCafe";
 
-const addCafe = () => {
+const AddCafe = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [cafeName, setCafeName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     //Validation Cafe Owner Password
@@ -47,7 +47,7 @@ const addCafe = () => {
               type="text"
               placeholder="Full Name"
               value={name}
-              onAction={(e) => setName(e.target.value)}
+              onAction={e => setName(e.target.value)}
               required={true}
               maxlength={100}
             />
@@ -56,7 +56,7 @@ const addCafe = () => {
               type="text"
               placeholder="Username"
               value={username}
-              onAction={(e) => setUsername(e.target.value)}
+              onAction={e => setUsername(e.target.value)}
               required={true}
               maxlength={12}
             />
@@ -65,7 +65,7 @@ const addCafe = () => {
               type="text"
               placeholder="Cafe Name"
               value={cafeName}
-              onAction={(e) => setCafeName(e.target.value)}
+              onAction={e => setCafeName(e.target.value)}
               required={true}
               maxlength={100}
             />
@@ -74,15 +74,14 @@ const addCafe = () => {
               type="password"
               placeholder="Password"
               value={password}
-              onAction={(e) => setPassword(e.target.value)}
+              onAction={e => setPassword(e.target.value)}
               required={true}
               maxlength={20}
             />
           </div>
           <button
             type="submit"
-            className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md transition duration-150 hover:bg-[#d6b513]"
-          >
+            className="mt-6 py-2 w-full font-medium bg-[#FFD400] rounded-md transition duration-150 hover:bg-[#d6b513]">
             Register
           </button>
         </form>
@@ -91,4 +90,4 @@ const addCafe = () => {
   );
 };
 
-export default addCafe;
+export default AddCafe;

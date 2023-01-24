@@ -42,7 +42,7 @@ const CafeTransaction = () => {
       .then(() => setError(false))
       .catch(() => setError(true));
   };
-  console.log(date);
+
   const onSelect = e => {
     let value = e.target.value;
     setSelects({ value: value });
@@ -82,7 +82,7 @@ const CafeTransaction = () => {
           const totalAmount = countTotal(res);
 
           setTransactions(res);
-          setDate("all");
+          setDate(["all", "all"]);
           setTotal(`${totalAmount}.00`);
         })
         .catch(() => setError(true));
