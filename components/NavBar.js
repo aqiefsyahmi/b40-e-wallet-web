@@ -148,6 +148,18 @@ const NavBar = () => {
             <div className="py-3 grid justify-center w-[8rem] gap-2 rounded-md bg-white shadow">
               <div
                 className={
+                  router.pathname != "/transactions/student"
+                    ? "active"
+                    : "font-semibold"
+                }>
+                <div className="w-[8rem] duration-150 hover:bg-[#d1cfcf]">
+                  <div className="ml-5 duration-150 hover:font-semibold">
+                    <Link href="/transactions/allCafe">All Cafe</Link>
+                  </div>
+                </div>
+              </div>
+              <div
+                className={
                   router.pathname != "/transactions/cafe"
                     ? "active"
                     : "font-semibold"
