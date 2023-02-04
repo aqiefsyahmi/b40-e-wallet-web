@@ -1,15 +1,18 @@
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Layout, Button } from "../../components";
 import {
   getOverallCafeTransactions,
   getOverallCafeTransactionsFilter,
 } from "../../lib/getTransactions";
+import { claim } from "../../lib/claim";
 import Link from "next/link";
 
 const AllCafe = () => {
   const [cafe, setCafe] = useState({});
   const [target, setTarget] = useState("all");
+  const dateFromRef = useRef(null);
+  const dateToRef = useRef(null);
 
   const onSelect = e => {
     let target = e.target.value;
@@ -61,6 +64,46 @@ const AllCafe = () => {
     }
   };
 
+  const onFind = () => {
+    getOverallCafeTransactionsFilter(
+      dateFromRef.current.value,
+      dateToRef.current.value
+    )
+      .then(data => {
+        setCafe(data);
+      })
+      .catch(err => {
+        if (err.response.status == 400) {
+          alert("No transaction found");
+        }
+      });
+  };
+
+  const onClaim = () => {
+    let from = dateFromRef.current.value;
+    let to = dateToRef.current.value;
+
+    if (!from || !to) {
+      alert("Please choose date");
+      return;
+    }
+
+    if (confirm("Are you sure")) {
+      claim(from, to)
+        .then(() => {
+          alert("Mark as claimed successfully");
+        })
+        .catch(err => {
+          if (err.response.status == 404) {
+            alert("Transactons not found");
+          }
+          if (err.response.status == 500) {
+            alert("Server error");
+          }
+        });
+    }
+  };
+
   useEffect(() => {
     getOverallCafeTransactions()
       .then(data => {
@@ -96,15 +139,15 @@ const AllCafe = () => {
               <label htmlFor="from" className="mr-2">
                 From
               </label>
-              <input type="date" id="from" />
+              <input type="date" id="from" ref={dateFromRef} />
             </span>
             <span className="py-2 px-3 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
               <label htmlFor="to" className="mr-2">
                 To
               </label>
-              <input type="date" id="to" />
+              <input type="date" id="to" ref={dateToRef} />
             </span>
-            <Button>Find</Button>
+            <Button onAction={onFind}>Find</Button>
           </div>
         </div>
         <div className="p-8 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
@@ -132,7 +175,7 @@ const AllCafe = () => {
                   </tr>
                 );
               })}
-              <tr className="text-gray-500">
+              <tr className="text-gray-500 font-medium">
                 <td colSpan={2} className="py-6 text-right">
                   Total
                 </td>
@@ -141,6 +184,12 @@ const AllCafe = () => {
                 </td>
                 <td className="py-6 text-center">
                   {cafe?.overall?.sum_amount}
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={3}></td>
+                <td className="w-fit text-center">
+                  <Button onAction={onClaim}>Mark as claimed</Button>
                 </td>
               </tr>
             </tbody>
