@@ -13,6 +13,7 @@ const AllCafe = () => {
   const [target, setTarget] = useState("all");
   const dateFromRef = useRef(null);
   const dateToRef = useRef(null);
+  const selectRef = useRef(null);
 
   const onSelect = e => {
     let target = e.target.value;
@@ -35,7 +36,11 @@ const AllCafe = () => {
           setCafe(data);
           setTarget("week");
         })
-        .catch(err => err);
+        .catch(err => {
+          alert(
+            `No transactions found for this week: ${startOfWeek}-${endOfWeek}`
+          );
+        });
     }
 
     if (target === "month") {
@@ -49,7 +54,9 @@ const AllCafe = () => {
           setCafe(data);
           setTarget("month");
         })
-        .catch(err => err);
+        .catch(err => {
+          alert("No transactions found for this month");
+        });
     }
 
     if (target === "today") {
@@ -60,17 +67,29 @@ const AllCafe = () => {
           setCafe(data);
           setTarget("today");
         })
-        .catch(err => err);
+        .catch(err => {
+          alert("No transactions found for today");
+        });
+    }
+
+    if (target === "custom") {
+      dateFromRef.current.focus();
     }
   };
 
   const onFind = () => {
+    // change selected in select elem
+    selectRef.current.value = "custom";
+
     getOverallCafeTransactionsFilter(
       dateFromRef.current.value,
       dateToRef.current.value
     )
       .then(data => {
         setCafe(data);
+        setTarget(
+          `custom?from=${dateFromRef.current.value}&to=${dateToRef.current.value}`
+        );
       })
       .catch(err => {
         if (err.response.status == 400) {
@@ -121,12 +140,14 @@ const AllCafe = () => {
         <div className="flex justify-between gap-3 items-center mb-3">
           <div>
             <select
+              ref={selectRef}
               onChange={onSelect}
               className="py-2 px-3 mr-2 border-[1px] rounded-md bg-[#FFFFFF] border-gray-300">
               <option value="all">All</option>
               <option value="today">Today</option>
               <option value="week">This Week</option>
               <option value="month">Month</option>
+              <option value="custom">Custom</option>
             </select>
             <Link href={`/transactions/pdf/cafe/${target}`}>
               <a target="_blank" rel="noopener noreferrer">
