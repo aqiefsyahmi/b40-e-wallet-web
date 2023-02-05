@@ -63,6 +63,15 @@ const Pdf = () => {
         })
         .catch(err => err);
     }
+
+    if (params?.date === "custom") {
+      getOverallCafeTransactionsFilter(params?.from, params?.to)
+        .then(data => {
+          setCafe(data);
+          setRange(`${params?.from}-${params?.to}`);
+        })
+        .catch(err => err);
+    }
   }, [params]);
 
   return (
