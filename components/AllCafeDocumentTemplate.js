@@ -12,6 +12,7 @@ const AllCafeDocumentTemplate = ({ data, range, currentDate }) => {
   return (
     <Document>
       <Page size="A4" orientation="landscape" style={styles.page}>
+
         <View style={styles.table}>
           <Image src={logo.src} style={{ width: 140 }} />
           <Text
@@ -43,6 +44,7 @@ const AllCafeDocumentTemplate = ({ data, range, currentDate }) => {
               <Text style={[styles.column, styles.column7]}>Bank Name</Text>
               <Text style={[styles.column, styles.column8]}>Transactions</Text>
               <Text style={[styles.column, styles.column9]}>Amount(RM)</Text>
+
             </View>
             {data?.transactions?.map((cafe, i) => (
               <View key={i} style={{ flexDirection: "row", borderBottom: 1 }}>

@@ -22,7 +22,7 @@ const DocumentTemplate = ({ data, week, realdate }) => {
               fontSize: 12,
               fontWeight: 100,
             }}>
-            eKupon UniSZA Transactions {week}
+            eKupon@UniSZA Transactions {week}
           </Text>
           <View
             style={[
@@ -35,10 +35,8 @@ const DocumentTemplate = ({ data, week, realdate }) => {
                 borderBottom: 1,
               }}>
               <Text style={[styles.column, styles.column1]}>No.</Text>
-              <Text style={[styles.column, styles.column2]}>
-                Transaction Id
-              </Text>
-              <Text style={[styles.column, styles.column3]}>Sender</Text>
+              <Text style={[styles.column, styles.column2]}>Cafe Name</Text>
+              <Text style={[styles.column, styles.column3]}>Transaction</Text>
               <Text style={[styles.column, styles.column4]}>Amount(RM)</Text>
             </View>
             {data?.map((transaction, i) => (
