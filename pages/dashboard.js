@@ -48,7 +48,7 @@ const Dashboard = () => {
           </div>
           <div className="flex-1">
             <div className="pb-2 uppercase text-sm font-semibold border-b-2 border-b-black">
-              Today Transaction
+              Total Transaction
             </div>
             <div className="mt-3 text-gray-600 ">
               <span className="text-black text-7xl font-semibold">

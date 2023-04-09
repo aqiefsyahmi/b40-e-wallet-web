@@ -8,7 +8,7 @@ import {
 } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 import { logo } from "../assets";
 
-const DocumentTemplate = ({ data, week, realdate }) => {
+const AllCafeDocumentTemplate = ({ data, range, currentDate }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -22,7 +22,7 @@ const DocumentTemplate = ({ data, week, realdate }) => {
               fontSize: 12,
               fontWeight: 100,
             }}>
-            eKupon@UniSZA Transactions {week}
+            eKupon@UniSZA Transactions {`(${range})`}
           </Text>
           <View
             style={[
@@ -36,26 +36,44 @@ const DocumentTemplate = ({ data, week, realdate }) => {
               }}>
               <Text style={[styles.column, styles.column1]}>No.</Text>
               <Text style={[styles.column, styles.column2]}>Cafe Name</Text>
-              <Text style={[styles.column, styles.column3]}>Transaction</Text>
+              <Text style={[styles.column, styles.column3]}>Transactions</Text>
               <Text style={[styles.column, styles.column4]}>Amount(RM)</Text>
             </View>
-            {data?.map((transaction, i) => (
+            {data?.transactions?.map((cafe, i) => (
               <View key={i} style={{ flexDirection: "row", borderBottom: 1 }}>
                 <Text style={[styles.column, styles.column1]}>{i + 1}.</Text>
                 <Text style={[styles.column, styles.column2]}>
-                  {transaction.transaction_id}
+                  {cafe.cafe_name}
                 </Text>
                 <Text style={[styles.column, styles.column3]}>
-                  {transaction.student_name}
+                  {cafe.total_transaction}
                 </Text>
                 <Text style={[styles.column, styles.column4]}>
-                  {transaction.amount}
+                  {cafe.total_amount}
                 </Text>
               </View>
             ))}
+            <View style={{ flexDirection: "row", borderBottom: 1 }}>
+              <Text
+                style={[
+                  styles.column,
+                  styles.column1,
+                  { borderRight: 0 },
+                ]}></Text>
+              <Text
+                style={[styles.column, styles.column2, { textAlign: "right" }]}>
+                Total
+              </Text>
+              <Text style={[styles.column, styles.column3]}>
+                {data?.overall?.sum_transaction}
+              </Text>
+              <Text style={[styles.column, styles.column4]}>
+                {data?.overall?.sum_amount}
+              </Text>
+            </View>
           </View>
           <Text style={{ fontSize: 11, marginTop: 24 }}>
-            This document printed on {realdate}
+            This document printed on {currentDate}
           </Text>
         </View>
       </Page>
@@ -86,7 +104,8 @@ const styles = StyleSheet.create({
     flex: 8,
   },
   column3: {
-    flex: 8,
+    flex: 2,
+    textAlign: "center",
   },
   column4: {
     flex: 2,
@@ -103,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DocumentTemplate;
+export default AllCafeDocumentTemplate;
