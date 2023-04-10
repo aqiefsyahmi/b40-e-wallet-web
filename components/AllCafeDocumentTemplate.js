@@ -12,7 +12,6 @@ const AllCafeDocumentTemplate = ({ data, range, currentDate }) => {
   return (
     <Document>
       <Page size="A4" orientation="landscape" style={styles.page}>
-
         <View style={styles.table}>
           <Image src={logo.src} style={{ width: 140 }} />
           <Text
@@ -40,21 +39,39 @@ const AllCafeDocumentTemplate = ({ data, range, currentDate }) => {
               <Text style={[styles.column, styles.column3]}>Cafe Address</Text>
               <Text style={[styles.column, styles.column4]}>Cafe Owner</Text>
               <Text style={[styles.column, styles.column5]}>Mobile No.</Text>
-              <Text style={[styles.column, styles.column6]}>Bank Account No.</Text>
+              <Text style={[styles.column, styles.column6]}>
+                Bank Account No.
+              </Text>
               <Text style={[styles.column, styles.column7]}>Bank Name</Text>
               <Text style={[styles.column, styles.column8]}>Transactions</Text>
               <Text style={[styles.column, styles.column9]}>Amount(RM)</Text>
-
             </View>
             {data?.transactions?.map((cafe, i) => (
               <View key={i} style={{ flexDirection: "row", borderBottom: 1 }}>
                 <Text style={[styles.column, styles.column1]}>{i + 1}.</Text>
-                <Text style={[styles.column, styles.column22]}>{cafe.cafe_name}</Text>
-                <Text style={[styles.column, styles.column33]}></Text>
-                <Text style={[styles.column, styles.column44]}></Text>
-                <Text style={[styles.column, styles.column5]}></Text>
-                <Text style={[styles.column, styles.column6]}></Text>
-                <Text style={[styles.column, styles.column77]}></Text>
+                <Text style={[styles.column, styles.column22]}>
+                  {cafe.cafe_name}
+                </Text>
+                <Text style={[styles.column, styles.column33]}>
+                  {cafe.cafe_address}
+                </Text>
+                <Text style={[styles.column, styles.column44]}>
+                  {cafe.owner_name}
+                </Text>
+                <Text style={[styles.column, styles.column5]}>
+                  {cafe.mobile_no}
+                </Text>
+                <Text style={[styles.column, styles.column6]}>
+                  {cafe.account_no}
+                </Text>
+                <Text
+                  style={[
+                    styles.column,
+                    styles.column77,
+                    { textAlign: "center" },
+                  ]}>
+                  {cafe.bank_name}
+                </Text>
                 <Text style={[styles.column, styles.column8]}>
                   {cafe.total_transaction}
                 </Text>
@@ -66,20 +83,48 @@ const AllCafeDocumentTemplate = ({ data, range, currentDate }) => {
             <View style={{ flexDirection: "row", borderBottom: 1 }}>
               <Text
                 style={[
-                  styles.column, styles.column1, { borderRight: 0 }
-                ]}></Text>
-                <Text style={[
-                  styles.column, styles.column2, { borderRight: 0 }
-                ]}></Text>
-                <Text style={[
-                  styles.column, styles.column3, { borderRight: 0 }
+                  styles.column,
+                  styles.column1,
+                  { borderRight: 0 },
                 ]}></Text>
               <Text
-                style={[styles.column, styles.column4, { borderRight: 0,}]}>
+                style={[
+                  styles.column,
+                  styles.column2,
+                  { borderRight: 0 },
+                ]}></Text>
+              <Text
+                style={[
+                  styles.column,
+                  styles.column3,
+                  { borderRight: 0 },
+                ]}></Text>
+              <Text
+                style={[
+                  styles.column,
+                  styles.column4,
+                  { borderRight: 0 },
+                ]}></Text>
+              <Text
+                style={[
+                  styles.column,
+                  styles.column5,
+                  { borderRight: 0 },
+                ]}></Text>
+              <Text
+                style={[
+                  styles.column,
+                  styles.column6,
+                  { borderRight: 0 },
+                ]}></Text>
+              <Text
+                style={[
+                  styles.column,
+                  styles.column7,
+                  { textAlign: "right", flex: 3.28 },
+                ]}>
+                Total
               </Text>
-              <Text style={[styles.column, styles.column5, { borderRight: 0 }]}></Text>
-              <Text style={[styles.column, styles.column6, { borderRight: 0 }]}></Text>
-              <Text style={[styles.column, styles.column7, { textAlign: "right",  flex: 3.28 }]}>Total</Text>
               <Text style={[styles.column, styles.column8]}>
                 {data?.overall?.sum_transaction}
               </Text>
