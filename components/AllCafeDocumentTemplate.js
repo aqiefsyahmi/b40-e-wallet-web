@@ -183,11 +183,11 @@ const styles = StyleSheet.create({
     flex: 5,
   },
   column5: {
-    flex: 2.7,
+    flex: 2.8,
     textAlign: "center",
   },
   column6: {
-    flex: 3.6,
+    flex: 4,
     textAlign: "center",
   },
   column7: {
